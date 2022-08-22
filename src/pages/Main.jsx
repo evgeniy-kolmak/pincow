@@ -1,5 +1,9 @@
+
+
 export default function Main() {
   return (
-    <h2>Что это такое?</h2>
+    <div className="wrapper">
+      <h2>Главная страница</h2>
+    </div>
   );
 }
