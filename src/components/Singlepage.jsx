@@ -23,4 +23,4 @@ export default function SinglePage() {
   );
 }
 
-// нужен крестик для закрытия
+

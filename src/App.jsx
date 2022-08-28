@@ -10,25 +10,30 @@ import { useState } from 'react';
 
 
 
-
-
 export default function App() {
-  const [value, setValue] = useState(null);
-  const handleObject = (object) => {
-    setValue(object)
+  const [weather, setWeather] = useState(null);
+  const handleData = data => {
+    setWeather(data);
   }
+
+
+
   return (
     <Routes>
       <Route path='/' element={<Header />}>
         <Route index element={<Main />} />
         <Route path='about' element={<About />} />
-        <Route path='/interaction' element={<Interaction handleObject={handleObject} />} />
-        <Route path='result' element={<Result data={value} />} />
+        <Route path='/interaction' element={<Interaction handleData={handleData} />} />
+        <Route path='result' element={<Result data={weather} />} />
         <Route path='error' element={<Error />} />
       </Route>
     </Routes >
 
   );
 }
+
+
+
+
 
 
