@@ -5,14 +5,14 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "r
 
 
 export default function Result({ data }) {
-  const { temp, cityName, iconId, descritpion } = useWeather(data);
+  const { temp, cityName, iconId, description } = useWeather(data);
   const depend = useDepend(useWeather(data), useDate());
 
   return (
     <>
       <h2>{cityName} {temp}&deg;</h2>
       <img src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} />
-      <h3>{descritpion}</h3>
+      <h3>{description}</h3>
 
       <LineChart
         width={700}

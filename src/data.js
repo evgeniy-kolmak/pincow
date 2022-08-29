@@ -1,6 +1,17 @@
 const getSuccess = {
   getSuccessPike: (weather, date) => {
     let chance = 35;
+    const nigativWind = ['C', 'СЗ', 'СВ'];
+    const currentHour = new Date().getHours();
+
+    if (weather.humidity >= 40) {
+      chance += 4;
+    }
+
+    if (weather.sys.sunrise === currentHour || weather.sys.sunset === currentHour) {
+      chance += 10;
+      chance += Math.round(weather.humidity / 10);
+    }
 
     if (date.month === 7 || date.month === 8) {
       chance -= 10;
@@ -44,6 +55,12 @@ const getSuccess = {
       chance += 4;
     }
 
+    if (nigativWind.indexOf(weather.wind.direction) >= 0) {
+      chance -= 15;
+    } else {
+      chance += 3;
+    }
+
     return chance;
   },
   getSuccessRudd: (weather, date) => {
@@ -57,6 +74,11 @@ const getSuccess = {
     };
 
     const nigativWind = ['C', 'СЗ', 'СВ'];
+
+    if (weather.humidity >= 40) {
+      chance += 4;
+    }
+
 
     if (favoritMonth.good.indexOf(date.month) >= 0) {
       chance += 17;
@@ -91,8 +113,9 @@ const getSuccess = {
       chance += 4;
     }
 
+
     if (nigativWind.indexOf(weather.wind.direction) >= 0) {
-      chance -= 10;
+      chance -= 15;
     } else {
       chance += 5;
     }
@@ -104,3 +127,4 @@ const getSuccess = {
 
 export const getSuccessPike = getSuccess.getSuccessPike;
 export const getSuccessRudd = getSuccess.getSuccessRudd;
+

@@ -44,6 +44,8 @@ export function useWeather(data) {
 
   }
 
+
+
   const dataWeather = {
     "cityName": data?.data?.name,
     "temp": Math.round(data?.data?.main?.temp ?? null),
@@ -55,8 +57,8 @@ export function useWeather(data) {
       "gust": Math.round(data?.data?.wind?.gust ?? null)
     },
     'sys': {
-      "sunrise": data?.data?.sys?.sunrise,
-      "sunset": data?.data?.sys?.sunset,
+      "sunrise": new Date(data?.data?.sys?.sunrise * 1000).getHours(),
+      "sunset": new Date(data?.data?.sys?.sunset * 1000).getHours(),
     },
     "clouds": data?.data?.clouds?.all,
     "visibility": data?.data?.visibility,

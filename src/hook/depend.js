@@ -2,6 +2,7 @@
 import { getSuccessPike, getSuccessRudd } from "../data"
 
 const getSuccessPerch = (weather, date) => {
+
   return date.month;
 }
 
@@ -25,4 +26,3 @@ export function useDepend(weather, date) {
   return fishData;
 }
 
-// Закат, рассвет
