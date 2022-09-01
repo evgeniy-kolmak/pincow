@@ -1,10 +1,4 @@
-
-import { getSuccessPike, getSuccessRudd } from "../data"
-
-const getSuccessPerch = (weather, date) => {
-
-  return date.month;
-}
+import { getSuccessPike, getSuccessPerch, getSuccessRudd } from "../data"
 
 
 

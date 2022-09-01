@@ -1,6 +1,6 @@
 const getSuccess = {
   getSuccessPike: (weather, date) => {
-    let chance = 35;
+    let chance = 33;
     const nigativWind = ['C', 'СЗ', 'СВ'];
     const currentHour = new Date().getHours();
 
@@ -63,8 +63,82 @@ const getSuccess = {
 
     return chance;
   },
+  getSuccessPerch: (weather, date) => {
+    let chance = 35;
+    const hour = new Date().getHours();
+    const favoritMonth = [3, 4, 6, 7, 8, 10, 11];
+    const nigativWind = ['C', 'СЗ', 'СВ', 'В'];
+
+    if (762 <= weather.pressure || weather.pressure <= 759) {
+      chance -= 10;
+    } else {
+      chance += 4;
+    }
+
+    if (weather.weatherId === 500 || weather.weatherId === 501) {
+      chance += 6
+    } else if (weather.description === 'Гроза') {
+      chance -= 20;
+    }
+
+    if (favoritMonth.indexOf(date.month) >= 0) {
+      chance += 10;
+    } else {
+      chance -= 6;
+    }
+    if (weather.temp < 15 || weather.wind.speed >= 5 || weather.weatherId.toString()[0] === '5') {
+      chance -= 9;
+    }
+    if (date.season === 'spring' || date.season === 'summer') {
+      if (weather.temp > 15 || weather.wind.speed < 5 || weather.description === 'Пасмурно') {
+        chance += 20;
+      }
+
+      if (weather.clouds >= 50) {
+        chance += 5;
+      }
+
+      if (weather.humidity >= 50) {
+        chance -= 6;
+      }
+      if (date.season === 'summer') {
+        if (weather.sys.sunrise > hour && weather.sys.sunset < hour) {
+          chance += 10;
+        }
+      }
+
+      if (date.month === 8 && weather.sys.sunrise === hour) {
+        chance += 12
+      }
+
+    }
+
+    if (date.month === 1 || date.month === 12) {
+      chance -= 14;
+    }
+
+    if (date.season === 'winter') {
+      if (weather.sys.sunrise === hour || weather.sys.sunset === hour) {
+        chance += 12;
+        if (weather.temp > 0) {
+          chance += 9;
+        }
+
+      }
+
+    }
+
+    if (nigativWind.indexOf(weather.wind.direction) >= 0) {
+      chance -= 15;
+    } else {
+      chance += 5;
+    }
+
+    return chance;
+  },
+
   getSuccessRudd: (weather, date) => {
-    let chance = 45;
+    let chance = 41;
 
     const favoritMonth = {
       good: [3, 6, 7, 8],
@@ -126,5 +200,6 @@ const getSuccess = {
 }
 
 export const getSuccessPike = getSuccess.getSuccessPike;
+export const getSuccessPerch = getSuccess.getSuccessPerch;
 export const getSuccessRudd = getSuccess.getSuccessRudd;
 

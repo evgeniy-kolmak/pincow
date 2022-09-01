@@ -45,7 +45,6 @@ export function useWeather(data) {
   }
 
 
-
   const dataWeather = {
     "cityName": data?.data?.name,
     "temp": Math.round(data?.data?.main?.temp ?? null),
@@ -64,7 +63,9 @@ export function useWeather(data) {
     "visibility": data?.data?.visibility,
     "pressure": Math.round(data?.data?.main?.pressure * 0.750062 ?? null),
     "humidity": data?.data?.main?.humidity,
+    "weatherId": data?.data?.weather[0]?.id,
   }
+
 
   return dataWeather;
 }

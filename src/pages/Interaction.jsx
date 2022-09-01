@@ -23,7 +23,7 @@ export default function Interaction({ handleData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const city = e.target.city.value;
+    const city = e.target.city.value.trim();
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&cnt=3&units=metric&appid=${token}`;
     getData(url);
 
