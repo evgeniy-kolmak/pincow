@@ -1,7 +1,7 @@
 const getSuccess = {
   getSuccessPike: (weather, date) => {
     let chance = 33;
-    const nigativWind = ['C', 'СЗ', 'СВ'];
+    const nigativeWind = ['C', 'СЗ', 'СВ'];
     const currentHour = new Date().getHours();
 
     if (weather.humidity >= 40) {
@@ -55,7 +55,7 @@ const getSuccess = {
       chance += 4;
     }
 
-    if (nigativWind.indexOf(weather.wind.direction) >= 0) {
+    if (nigativeWind.indexOf(weather.wind.direction) >= 0) {
       chance -= 15;
     } else {
       chance += 3;
@@ -65,9 +65,9 @@ const getSuccess = {
   },
   getSuccessPerch: (weather, date) => {
     let chance = 35;
-    const hour = new Date().getHours();
+    const currentHour = new Date().getHours();
     const favoritMonth = [3, 4, 6, 7, 8, 10, 11];
-    const nigativWind = ['C', 'СЗ', 'СВ', 'В'];
+    const nigativeWind = ['C', 'СЗ', 'СВ', 'В'];
 
     if (762 <= weather.pressure || weather.pressure <= 759) {
       chance -= 10;
@@ -102,12 +102,12 @@ const getSuccess = {
         chance -= 6;
       }
       if (date.season === 'summer') {
-        if (weather.sys.sunrise > hour && weather.sys.sunset < hour) {
+        if (weather.sys.sunrise > currentHour && weather.sys.sunset < currentHour) {
           chance += 10;
         }
       }
 
-      if (date.month === 8 && weather.sys.sunrise === hour) {
+      if (date.month === 8 && weather.sys.sunrise === currentHour) {
         chance += 12
       }
 
@@ -118,7 +118,7 @@ const getSuccess = {
     }
 
     if (date.season === 'winter') {
-      if (weather.sys.sunrise === hour || weather.sys.sunset === hour) {
+      if (weather.sys.sunrise === currentHour || weather.sys.sunset === currentHour) {
         chance += 12;
         if (weather.temp > 0) {
           chance += 9;
@@ -128,10 +128,328 @@ const getSuccess = {
 
     }
 
-    if (nigativWind.indexOf(weather.wind.direction) >= 0) {
+    if (nigativeWind.indexOf(weather.wind.direction) >= 0) {
       chance -= 15;
     } else {
       chance += 5;
+    }
+
+    return chance;
+  },
+  getSuccessBurbot: (weather, date) => {
+    let chance = 20;
+    const favoritMonth = [1, 11, 12];
+    const currentHour = new Date().getHours();
+    const positiveWind = ['C', 'СЗ', 'СВ'];
+
+    if (762 <= weather.pressure || weather.pressure <= 759) {
+      chance -= 8;
+    } else {
+      chance += 4;
+    }
+
+    if (weather.humidity >= 47) {
+      chance += 4;
+    }
+
+    if (favoritMonth.indexOf(date.month) >= 0) {
+      chance += 17
+    } else {
+      chance -= 3;
+    }
+
+    if (weather.sys.sunrise <= currentHour && weather.sys.sunset <= currentHour) {
+      chance += 15;
+    } else {
+      chance -= 5;
+    }
+
+    if (weather.visibility < 10000) {
+      chance += 3;
+    } else {
+      chance -= 7;
+    }
+
+
+    if (positiveWind.indexOf(weather.wind.direction) >= 0) {
+      chance += 11
+    } else {
+      chance -= 3;
+    }
+
+    if (date.season === 'winter' || date.season === 'autumn') {
+      chance += 7
+      if (weather.clouds >= 60) {
+        chance += 5;
+      }
+      if (weather.wind.speed >= 5 || weather.wind.gust >= 5) {
+        chance += 10;
+      }
+
+      if (weather.weatherId.toString()[0] === '5' || weather.weatherId.toString()[0] === '6') {
+        chance += 20;
+      } else {
+        chance -= 6;
+      }
+    } else {
+      chance -= 7
+    }
+
+
+    return chance;
+  },
+  getSuccessCrucian: (weather, date) => {
+    let chance = 45;
+    const positiveWind = ['Ю', 'ЮЗ', 'ЮВ'];
+
+    if (weather.pressure > 750) {
+      chance -= 10;
+    } else {
+      chance += 4;
+    }
+
+    if (weather.weatherId.toString()[0] === '5' || weather.weatherId.toString()[0] === '3') {
+      if (date.season === 'summer') {
+        chance += 20;
+      } else if (date.season === 'spring' || date.season === 'autumn') {
+        chance -= 12;
+      }
+    }
+
+    if (date.season === 'winter') {
+      chance -= 20;
+      if (weather.weatherId.toString()[0] === '6') {
+        chance -= 10;
+      }
+    }
+
+    if (7 <= weather.wind.speed && 10 <= weather.wind.speed) {
+      chance += 7;
+    }
+
+    if (weather.wind.speed >= 10 || weather.wind.gust >= 10 || weather.wind.speed <= 1) {
+      chance -= 10;
+    }
+
+    if (positiveWind.indexOf(weather.wind.direction) >= 0) {
+      chance += 11
+    } else {
+      chance -= 3;
+    }
+
+    if (weather.visibility < 10000) {
+      chance += 3;
+    } else {
+      chance -= 7;
+    }
+
+    if (weather.clouds >= 50) {
+      chance += 5;
+    }
+
+    if (weather.humidity >= 50) {
+      chance -= 6;
+    } else {
+      chance += 3
+    }
+
+    if (date.season === 'spring' || date.season === 'autumn') {
+      if (weather.temp >= 15) {
+        chance += 15;
+      } else {
+        chance -= 5;
+      }
+    }
+
+    if (date.season === 'summer') {
+      if (weather.temp >= 23) {
+        chance -= 14;
+      } else {
+        chance += 6;
+      }
+    }
+    return chance;
+  },
+  getSuccessRoach: (weather, date) => {
+    let chance = 50;
+
+    if (762 <= weather.pressure || weather.pressure <= 759) {
+      chance -= 12;
+    } else {
+      chance += 4;
+    }
+
+    if (weather.humidity >= 40) {
+      chance += 4;
+    }
+
+    if (weather.visibility < 10000) {
+      chance += 5;
+    } else {
+      chance -= 7;
+    }
+
+    if (date.season === 'summer' || date.season === 'winter') {
+      if (weather.temp >= 25) {
+        chance -= 11;
+      }
+    }
+
+
+    return chance;
+  },
+
+  getSuccessCarp: (weather, date) => {
+    let chance = 40;
+    const positiveWind = ['Ю', 'ЮЗ', 'ЮВ'];
+    const nigativeWind = ['C', 'СЗ', 'СВ'];
+
+    if (nigativeWind.indexOf(weather.wind.direction) >= 0) {
+      chance -= 15;
+    } else {
+      chance += 5;
+    }
+
+    if (762 <= weather.pressure || weather.pressure <= 759) {
+      chance -= 10;
+    } else {
+      chance += 5;
+    }
+
+    if (weather.visibility < 10000) {
+      chance += 3;
+    } else {
+      chance -= 7;
+    }
+
+    if (date.season === 'summer') {
+      chance += 10;
+
+      if (weather.wind.speed <= 5 || weather.wind.gust <= 5) {
+        chance += 10;
+      } else {
+        chance -= 6;
+      }
+
+      if (weather.weatherID === 500) {
+        chance += 8;
+      }
+
+      if (weather.clouds >= 65) {
+        chance += 12
+      } else {
+        chance -= 4;
+      }
+
+      if (weather.temp >= 22) {
+        chance += 7;
+      }
+
+    }
+
+    if (date.season === 'spring') {
+      if (weather.wind.speed <= 5 || weather.wind.gust <= 5) {
+        chance += 10;
+      } else {
+        chance -= 6;
+      }
+    }
+
+    if (date.season === 'autumn') {
+      if (positiveWind.indexOf(weather.wind.direction) >= 0) {
+        chance += 14
+      } else {
+        chance -= 6;
+      }
+
+      if (weather.temp >= 15) {
+        chance += 12
+      } else {
+        chance -= 7;
+      }
+
+    }
+
+    if (date.season === 'winter') {
+      chance += 3;
+      if (positiveWind.indexOf(weather.wind.direction) >= 0) {
+        chance += 11
+      } else {
+        chance -= 3;
+      }
+
+      if (weather.clouds >= 50) {
+        chance += 10
+      } else {
+        chance -= 4;
+      }
+
+      if (weather.temp >= 0) {
+        chance += 15
+      } else {
+        chance -= 7;
+      }
+
+      if (weather.weatherID === 600) {
+        chance += 10;
+      }
+    }
+
+    return chance;
+  },
+  getSuccessBream: (weather, date) => {
+    let chance = 35;
+
+    if (762 <= weather.pressure || weather.pressure <= 759) {
+      chance -= 10;
+    } else {
+      chance += 4;
+    }
+
+    if (weather.temp >= 30) {
+      chance -= 25;
+    }
+
+    if (weather.wind.direction === "ЮЗ") {
+      chance += 10;
+    } else {
+      chance -= 4;
+    }
+
+    if (weather.wind.speed <= 5 || weather.wind.gust <= 5) {
+      chance += 10;
+    } else {
+      chance -= 6;
+    }
+
+    if (weather.visibility < 10000) {
+      chance += 5;
+    } else {
+      chance -= 7;
+    }
+
+
+    if (date.season === 'summer') {
+      if (weather.weatherId.toString()[0] === '5') {
+        chance += 9;
+      }
+      if (weather.temp >= 20) {
+        chance += 6;
+      }
+    }
+
+    if (weather.humidity >= 50) {
+      chance -= 4;
+    } else {
+      chance += 7
+    }
+
+    if (date.season === 'spring' || date.season === 'autumn') {
+      if (15 <= weather.temp && 17 <= weather.temp) {
+        chance += 10;
+      } else {
+        chance -= 4;
+      }
     }
 
     return chance;
@@ -147,7 +465,7 @@ const getSuccess = {
 
     };
 
-    const nigativWind = ['C', 'СЗ', 'СВ'];
+    const nigativeWind = ['C', 'СЗ', 'СВ'];
 
     if (weather.humidity >= 40) {
       chance += 4;
@@ -188,7 +506,7 @@ const getSuccess = {
     }
 
 
-    if (nigativWind.indexOf(weather.wind.direction) >= 0) {
+    if (nigativeWind.indexOf(weather.wind.direction) >= 0) {
       chance -= 15;
     } else {
       chance += 5;
@@ -201,5 +519,10 @@ const getSuccess = {
 
 export const getSuccessPike = getSuccess.getSuccessPike;
 export const getSuccessPerch = getSuccess.getSuccessPerch;
+export const getSuccessBurbot = getSuccess.getSuccessBurbot;
+export const getSuccessCrucian = getSuccess.getSuccessCrucian;
+export const getSuccessRoach = getSuccess.getSuccessRoach;
+export const getSuccessCarp = getSuccess.getSuccessCarp;
+export const getSuccessBream = getSuccess.getSuccessBream;
 export const getSuccessRudd = getSuccess.getSuccessRudd;
 

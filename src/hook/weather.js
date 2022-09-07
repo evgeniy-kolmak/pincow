@@ -66,6 +66,5 @@ export function useWeather(data) {
     "weatherId": data?.data?.weather[0]?.id,
   }
 
-
   return dataWeather;
 }
