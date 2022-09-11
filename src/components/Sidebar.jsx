@@ -25,7 +25,11 @@ export default function Sidebar(props) {
             <Close />
           </IconButton>
         </ListItem>
-        <Divider />
+        <Divider
+          sx={{
+            mb: 2
+          }}
+        />
         <ListItem >
           <ListItemIcon>
             <LabelImportant />
