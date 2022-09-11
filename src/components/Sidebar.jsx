@@ -1,6 +1,9 @@
-import { Drawer, ListItem, IconButton } from "@mui/material";
-import { Link } from 'react-router-dom'
-import CloseIcon from '@mui/icons-material/Close';
+import { Drawer, List, ListItem, ListItemIcon, Typography, Divider, Avatar, IconButton } from "@mui/material";
+import { Close, Widgets, LabelImportant, Info, Layers } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+
+
+
 
 
 export default function Sidebar(props) {
@@ -12,14 +15,37 @@ export default function Sidebar(props) {
       open={menuOpen}
       onClose={closeMenu}
     >
-      <ListItem sx={{ width: '400px' }}>
-        <Link to='/'>Main</Link>
-        <Link to='about'>About</Link>
-        <Link to='interaction'>Interaction</Link>
-      </ListItem>
-      <IconButton onClick={closeMenu}>
-        <CloseIcon />
-      </IconButton>
+      <List sx={{ width: '400px' }}>
+        <ListItem>
+          <ListItemIcon>
+            <Widgets />
+          </ListItemIcon>
+          <Typography variant='h4' component='span' sx={{ flexGrow: 1 }}>Меню</Typography>
+          <IconButton onClick={closeMenu}>
+            <Close />
+          </IconButton>
+        </ListItem>
+        <Divider />
+        <ListItem >
+          <ListItemIcon>
+            <LabelImportant />
+          </ListItemIcon>
+          <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='/'><Typography variant="h6" component='span'>Главная</Typography></Link>
+        </ListItem>
+        <ListItem >
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='about'><Typography variant="h6" component='span'>О нас</Typography></Link>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Layers />
+          </ListItemIcon>
+          <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='interaction'><Typography variant="h6" component='span'>Текущий прогноз</Typography>
+          </Link>
+        </ListItem>
+      </List>
     </Drawer >
 
   );
