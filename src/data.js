@@ -64,7 +64,7 @@ const getSuccess = {
     return chance;
   },
   getSuccessPerch: (weather, date) => {
-    let chance = 35;
+    let chance = 38;
     const currentHour = new Date().getHours();
     const favoritMonth = [3, 4, 6, 7, 8, 10, 11];
     const nigativeWind = ['C', 'СЗ', 'СВ', 'В'];
@@ -137,7 +137,7 @@ const getSuccess = {
     return chance;
   },
   getSuccessBurbot: (weather, date) => {
-    let chance = 20;
+    let chance = 37;
     const favoritMonth = [1, 11, 12];
     const currentHour = new Date().getHours();
     const positiveWind = ['C', 'СЗ', 'СВ'];
@@ -199,7 +199,7 @@ const getSuccess = {
     return chance;
   },
   getSuccessCrucian: (weather, date) => {
-    let chance = 45;
+    let chance = 47;
     const positiveWind = ['Ю', 'ЮЗ', 'ЮВ'];
 
     if (weather.pressure > 750) {
@@ -271,7 +271,7 @@ const getSuccess = {
     return chance;
   },
   getSuccessRoach: (weather, date) => {
-    let chance = 50;
+    let chance = 48;
 
     if (762 <= weather.pressure || weather.pressure <= 759) {
       chance -= 12;
@@ -300,7 +300,7 @@ const getSuccess = {
   },
 
   getSuccessCarp: (weather, date) => {
-    let chance = 40;
+    let chance = 42;
     const positiveWind = ['Ю', 'ЮЗ', 'ЮВ'];
     const nigativeWind = ['C', 'СЗ', 'СВ'];
 
@@ -398,7 +398,7 @@ const getSuccess = {
     return chance;
   },
   getSuccessBream: (weather, date) => {
-    let chance = 35;
+    let chance = 41;
 
     if (762 <= weather.pressure || weather.pressure <= 759) {
       chance -= 10;
