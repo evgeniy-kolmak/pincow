@@ -1,4 +1,3 @@
-import './App.css';
 import Header from './components/Singlepage';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
@@ -15,8 +14,6 @@ export default function App() {
   const handleData = data => {
     setWeather(data);
   }
-
-
 
   return (
     <Routes>

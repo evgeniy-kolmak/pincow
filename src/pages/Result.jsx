@@ -11,7 +11,7 @@ export default function Result({ data }) {
   return (
     <>
       <h2>{cityName} {temp}&deg;</h2>
-      <img src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} />
+      <img src={`images/icons/${iconId}.svg`} />
       <h3>{description}</h3>
 
       <LineChart
@@ -30,7 +30,6 @@ export default function Result({ data }) {
         <YAxis />
         <Tooltip />
         <Legend />
-
         <Line type="monotone" dataKey="Успех" stroke="purple" activeDot={{ r: 8 }} />
       </LineChart>
     </>
