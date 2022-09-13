@@ -6,7 +6,7 @@ export function useWeather(data) {
 
   const getDerectionWind = data => {
     const deg = data?.data?.wind?.deg;
-
+    d
     if (23 <= deg && deg <= 67) {
       return 'СВ';
     }
@@ -29,16 +29,16 @@ export function useWeather(data) {
       return 'ЮЗ';
     }
 
-    if (248 <= deg <= 293) {
+    if (248 <= deg && deg <= 293) {
       return 'З';
     }
 
-    if (294 <= deg <= 337) {
+    if (294 <= deg && deg <= 337) {
       return 'СЗ';
 
     }
 
-    return 'С';
+    return 'C';
 
   }
 
