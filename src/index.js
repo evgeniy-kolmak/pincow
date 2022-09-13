@@ -5,7 +5,6 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-// #1E1E1E фон
 
 const theme = createTheme({
   palette: {

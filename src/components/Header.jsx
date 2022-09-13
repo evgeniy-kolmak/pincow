@@ -22,7 +22,6 @@ export default function Header({ handleMenu }) {
               component="span"
               sx={{
                 ml: 1,
-                display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.4rem',

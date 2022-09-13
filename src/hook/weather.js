@@ -1,5 +1,3 @@
-
-
 export function useWeather(data) {
 
   const symbolToUpperCase = word => {
@@ -53,7 +51,8 @@ export function useWeather(data) {
     "wind": {
       "direction": getDerectionWind(data),
       "speed": Math.round(data?.data?.wind?.speed ?? null),
-      "gust": Math.round(data?.data?.wind?.gust ?? null)
+      "gust": Math.round(data?.data?.wind?.gust ?? null),
+      "deg": data?.data?.wind?.deg,
     },
     'sys': {
       "sunrise": new Date(data?.data?.sys?.sunrise * 1000).getHours(),
@@ -65,6 +64,7 @@ export function useWeather(data) {
     "humidity": data?.data?.main?.humidity,
     "weatherId": data?.data?.weather[0]?.id,
   }
+
 
   return dataWeather;
 }

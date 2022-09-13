@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -14,7 +12,6 @@ export function usePosition() {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&units=metric&appid=${token}`;
-
       axios(url)
         .then(response => setCurrentPosition(response))
 
@@ -24,7 +21,7 @@ export function usePosition() {
 
   const currentWeather = {
     "temp": Math.round(currentPosition?.data?.main?.temp ?? 18),
-    "cityName": currentPosition?.data?.name ?? 'Minsk',
+    "cityName": currentPosition?.data?.name ?? 'Минск',
     "iconId": currentPosition?.data?.weather[0]?.icon ?? '01d'
   }
 
