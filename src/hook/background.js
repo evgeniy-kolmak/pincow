@@ -11,7 +11,7 @@ export function useBackground(data, currentIconId) {
     '03d': 'linear-gradient(to right, #00416a, #ebe8d8)',
     '03n': 'linear-gradient(to left, #606c88, #3f4c6b)',
     '04d': 'linear-gradient(to left, #141e30, #243b55)',
-    '04n': 'llinear-gradient(to left, #485563, #29323c)',
+    '04n': 'linear-gradient(to left, #485563, #29323c)',
     '09d': 'linear-gradient(to top, #4b6cb7, #182848)',
     '09n': 'linear-gradient(to right, #0f2027, #203a43, #2c5364)',
     '10d': 'linear-gradient(to top, #076585, #fff)',

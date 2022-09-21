@@ -16,7 +16,9 @@ export default function SinglePage({ data }) {
   return (
     <div
       style={{
-        background: color,
+        backgroundImage: color,
+        backgroundSize: '400%, 400%',
+        animation: 'gradient 40s linear 0s infinite normal forwards',
         height: '100vh'
       }}
     >
