@@ -4,7 +4,7 @@ import { useState, } from 'react';
 import { Navigate } from 'react-router-dom';
 
 
-export default function Interaction({ handleData }) {
+export default function Forecast({ handleData }) {
   const token = 'ed91ab4fb4bd6e64a38a185d33502a50';
 
   const [success, setSuccess] = useState(null);
@@ -12,7 +12,7 @@ export default function Interaction({ handleData }) {
   const getData = async (url) => {
     try {
       const response = await axios(url);
-      handleData(response);
+      handleData(response.data);
       setSuccess('success')
     } catch (error) {
       console.log(error);
@@ -23,8 +23,8 @@ export default function Interaction({ handleData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const city = e.target.city.value.trim();
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&cnt=3&units=metric&appid=${token}`;
+    const city = e.target.city.value.trim()
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ru&units=metric&appid=${token}`;
     getData(url);
 
   }
@@ -37,7 +37,7 @@ export default function Interaction({ handleData }) {
       <Button variant="contained" type='submit'>Send</Button>
 
       {success === "success" && (
-        <Navigate to="/result" replace={true} />
+        <Navigate to="/done/current" replace={true} />
       )}
       {success === 'fail' && (
         <Navigate to="/error" replace={true} />

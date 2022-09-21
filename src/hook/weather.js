@@ -5,8 +5,7 @@ export function useWeather(data) {
   }
 
   const getDerectionWind = data => {
-    const deg = data?.data?.wind?.deg;
-    d
+    const deg = data?.list[0].wind?.deg;
     if (23 <= deg && deg <= 67) {
       return 'СВ';
     }
@@ -44,15 +43,15 @@ export function useWeather(data) {
 
 
   const dataWeather = {
-    "cityName": data?.data?.name,
-    "temp": Math.round(data?.data?.main?.temp ?? null),
-    "description": symbolToUpperCase(data?.data?.weather[0].description),
-    "iconId": data?.data?.weather[0]?.icon,
+    "cityName": data?.city.name,
+    "temp": Math.round(data?.list[0].main.temp ?? null),
+    "description": symbolToUpperCase(data?.list[0].weather[0].description),
+    "iconId": data?.list[0].weather[0]?.icon,
     "wind": {
       "direction": getDerectionWind(data),
-      "speed": Math.round(data?.data?.wind?.speed ?? null),
-      "gust": Math.round(data?.data?.wind?.gust ?? null),
-      "deg": data?.data?.wind?.deg,
+      "speed": Math.round(data?.list[0].wind?.speed ?? null),
+      "gust": Math.round(data?.list[0].wind?.gust ?? null),
+      "deg": data?.list[0].wind?.deg,
     },
     'sys': {
       "sunrise": new Date(data?.data?.sys?.sunrise * 1000).getHours(),
@@ -60,9 +59,9 @@ export function useWeather(data) {
     },
     "clouds": data?.data?.clouds?.all,
     "visibility": data?.data?.visibility,
-    "pressure": Math.round(data?.data?.main?.pressure * 0.750062 ?? null),
+    "pressure": Math.round(data?.list[0].main?.pressure * 0.750062 ?? null),
     "humidity": data?.data?.main?.humidity,
-    "weatherId": data?.data?.weather[0]?.id,
+    "weatherId": data?.list[0].weather[0]?.id,
   }
 
 

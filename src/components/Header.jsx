@@ -1,7 +1,7 @@
-import { AppBar, Toolbar, IconButton, Typography, Box, Tooltip } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Typography, Box, Icon, Tooltip } from '@mui/material';
 import { useDate } from '../hook/date';
 import { usePosition } from '../hook/positionWeather';
-import { Menu, Phishing } from '@mui/icons-material';
+import { Menu, FiberPin } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 
@@ -13,8 +13,8 @@ export default function Header({ handleMenu }) {
     <AppBar position='static'>
       <Toolbar >
         <Box sx={{ flexGrow: 1, }}>
-          <Link style={{ color: 'inherit', textDecoration: 'none', display: 'flex' }} to="/">
-            <Phishing sx={{
+          <Link style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center' }} to="/">
+            <FiberPin sx={{
               color: '#fcad03'
             }} fontSize="large" />
             <Typography
@@ -31,7 +31,7 @@ export default function Header({ handleMenu }) {
                 color: '#ede8e8',
               }}
             >
-              pincow
+              cow
             </Typography>
           </Link>
         </Box>
@@ -40,7 +40,6 @@ export default function Header({ handleMenu }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-
           }}
         >
           <Typography
@@ -53,10 +52,13 @@ export default function Header({ handleMenu }) {
             component="span"
             sx={{
               ml: 4,
+              display: 'flex',
+              alignItems: 'center'
             }}>
             {cityName} {temp} &deg;
-            {/* change icon */}
-            <img style={{ verticalAlign: 'middle', marginLeft: '5px' }} src={`images/icons/${iconId}.svg`} />
+            <Icon sx={{ fontSize: 40 }}>
+              <img src={`images/icons/${iconId}.svg`} />
+            </Icon>
           </Typography>
         </Box>
         <Tooltip title="Oткрыть меню">

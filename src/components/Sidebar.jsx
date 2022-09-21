@@ -2,10 +2,6 @@ import { Drawer, List, ListItem, ListItemIcon, Typography, Divider, Avatar, Icon
 import { Close, Widgets, LabelImportant, Info, Layers } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-
-
-
-
 export default function Sidebar(props) {
   const { menuOpen, closeMenu } = props;
 
@@ -46,7 +42,7 @@ export default function Sidebar(props) {
           <ListItemIcon>
             <Layers />
           </ListItemIcon>
-          <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='interaction'><Typography variant="h6" component='span'>Текущий прогноз</Typography>
+          <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='forecast'><Typography variant="h6" component='span'>Прогноз</Typography>
           </Link>
         </ListItem>
       </List>
