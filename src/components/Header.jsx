@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, IconButton, Typography, Box, Icon, Tooltip } from '@mui/material';
 import { useDate } from '../hook/date';
 import { usePosition } from '../hook/positionWeather';
-import { Menu, FiberPin } from '@mui/icons-material';
+import { Menu, FiberPin, NearMe, CalendarMonth } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 
@@ -46,7 +46,13 @@ export default function Header({ handleMenu }) {
             sx={{
               fontSize: '17px'
             }}
-          >Сегодня {currentDateString} </Typography>
+          >
+            <CalendarMonth
+              sx={{
+                verticalAlign: 'middle',
+                mr: 0.8
+              }}
+            />Сегодня {currentDateString} </Typography>
           <Typography
             variant="h6"
             component="span"
@@ -55,8 +61,9 @@ export default function Header({ handleMenu }) {
               display: 'flex',
               alignItems: 'center'
             }}>
+            <NearMe sx={{ mr: 0.8 }} />
             {cityName} {temp} &deg;
-            <Icon sx={{ fontSize: 40 }}>
+            <Icon sx={{ fontSize: 40, ml: 1.3 }}>
               <img src={`images/icons/${iconId}.svg`} />
             </Icon>
           </Typography>
