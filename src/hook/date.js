@@ -1,37 +1,28 @@
 export function useDate() {
   const date = new Date();
 
+  const getListdaysWeek = () => {
+    const daysWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    let day = date.getDay();
+    const result = [];
+    for (let i = 0; i < 5; i++) {
+      if (day + i > 6) {
+        day -= day + i;
+      }
+      result.push(daysWeek[day + i])
+    }
+    return result;
+  }
+
   const dateString = date.toLocaleDateString('ru', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
   });
-  const month = date.getMonth() + 1;
-
-
-  const getSeason = month => {
-
-    if (3 <= month && month <= 5) {
-      return 'spring';
-    }
-
-    if (6 <= month && month <= 8) {
-      return 'summer';
-    }
-
-    if (9 <= month && month <= 11) {
-      return 'autumn';
-    }
-
-    return 'winter';
-  }
-
 
 
   return {
-    month,
+    dayWeek: getListdaysWeek(),
     currentDateString: dateString,
-    season: getSeason(month),
-
   }
 }
