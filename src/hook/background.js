@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 export function useBackground(data, currentIconId) {
-  const iconId = data?.data?.weather[0]?.icon;
+  console.log(data);
+  const iconId = data?.list[0].weather[0].icon;
 
   const colors = {
     '01d': 'linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)',
