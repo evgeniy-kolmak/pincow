@@ -1,69 +1,78 @@
-export function useWeather(data) {
+import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp } from '../storage';
+import { Commit } from '@mui/icons-material';
+import { Typography } from '@mui/material';
+import { useDate } from "./date";
 
-  const symbolToUpperCase = word => {
-    return word[0].toUpperCase() + word.slice(1);
-  }
+export function useWeather(data, forecast) {
+  const { dayWeek } = useDate()
+  const city = data?.city;
+  const currentForecast = data?.list[0];
+  const arrayForecastHours = data?.list;
 
-  const getDerectionWind = data => {
-    const deg = data?.list[0].wind?.deg;
-    if (23 <= deg && deg <= 67) {
-      return 'СВ';
-    }
+  console.log(data);
 
-    if (68 <= deg && deg <= 113) {
-      return 'В';
-    }
+  const getIcon = getWeekIcon(arrayForecastHours);
+  const getTemp = getWeekTemp(arrayForecastHours);
 
-    if (114 <= deg && deg <= 157) {
-      return 'ЮВ';
-
-    }
-
-    if (158 <= deg && deg <= 203) {
-      return 'Ю';
-
-    }
-
-    if (204 <= deg && deg <= 247) {
-      return 'ЮЗ';
-    }
-
-    if (248 <= deg && deg <= 293) {
-      return 'З';
-    }
-
-    if (294 <= deg && deg <= 337) {
-      return 'СЗ';
-
-    }
-
-    return 'C';
-
-  }
+  const getJsxDay = arrayForecastHours
+    .filter((item, i) => (1 <= i && i <= 8))
+    .map((item, i) => (
+      <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }} key={i}>
+        <div>{item.dt_txt.slice(11, 16)}</div>
+        < img src={`../images/icons/${item.weather[0].icon}.svg`} />
+        <div>{Math.round(item.main.temp)}&deg;</div>
+      </div>
+    ));
 
 
-  const dataWeather = {
-    "cityName": data?.city.name,
-    "temp": Math.round(data?.list[0].main.temp ?? null),
-    "description": symbolToUpperCase(data?.list[0].weather[0].description),
-    "iconId": data?.list[0].weather[0]?.icon,
+  const getJsxWeek = getIcon.map((item, i) => (
+    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '200px' }}>
+      <Typography variant='h5' component='p'>{dayWeek[i]}</Typography>
+      < img src={`../images/icons/${item}d.svg`} />
+      <Typography variant='h5' component='span'>{getTemp[i].maxTemp}&deg;</Typography> <Commit /> <Typography variant='h5' component='span'>{getTemp[i].minTemp}&deg;</Typography>
+    </div>
+  ));
+
+  const getCurrent = {
+    "city": {
+      "name": city.name,
+      "country": city.country,
+      "population": city.population,
+      "sunrise": new Date(city.sunrise * 1000).toLocaleDateString('ru', {
+        hour: 'numeric',
+        minute: 'numeric',
+      }).slice(12),
+      "sunset": new Date(city.sunset * 1000).toLocaleDateString('ru', {
+        hour: 'numeric',
+        minute: 'numeric',
+      }).slice(12),
+    },
+    'base': {
+      "temp": Math.round(currentForecast.main.temp ?? null),
+      "description": symbolToUpperCase(currentForecast.weather[0].description),
+      "iconId": currentForecast.weather[0]?.icon,
+    },
     "wind": {
       "direction": getDerectionWind(data),
-      "speed": Math.round(data?.list[0].wind?.speed ?? null),
-      "gust": Math.round(data?.list[0].wind?.gust ?? null),
-      "deg": data?.list[0].wind?.deg,
+      "speed": Math.round(currentForecast.wind?.speed ?? null),
+      "deg": currentForecast.wind?.deg,
     },
-    'sys': {
-      "sunrise": new Date(data?.data?.sys?.sunrise * 1000).getHours(),
-      "sunset": new Date(data?.data?.sys?.sunset * 1000).getHours(),
+    "main": {
+      "clouds": currentForecast.clouds.all,
+      "pressure": Math.round(currentForecast.main.pressure * 0.750062 ?? null),
+      "visibility": currentForecast.main.pressure.visibility,
+      "tempFeels": Math.round(currentForecast.main.feels_like ?? null),
+      "pop": Math.round(currentForecast.pop * 100),
+      "count": (currentForecast?.rain?.['3h'] || currentForecast?.snow?.['3h']) ?? 0,
+      "humidity": currentForecast.main.humidity,
     },
-    "clouds": data?.data?.clouds?.all,
-    "visibility": data?.data?.visibility,
-    "pressure": Math.round(data?.list[0].main?.pressure * 0.750062 ?? null),
-    "humidity": data?.data?.main?.humidity,
-    "weatherId": data?.list[0].weather[0]?.id,
+  };
+
+  switch (forecast) {
+    case 'current': return getCurrent
+    case 'day': return getJsxDay
+    case 'week': return getJsxWeek
   }
 
 
-  return dataWeather;
 }

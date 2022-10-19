@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 export function useBackground(data, currentIconId) {
-  console.log(data);
   const iconId = data?.list[0].weather[0].icon;
 
   const colors = {

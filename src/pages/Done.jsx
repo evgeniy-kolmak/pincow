@@ -1,12 +1,12 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Card, Box, Button, } from '@mui/material';
 
-export default function Result() {
+export default function Done() {
 
   return (
     <Box sx={{
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
     }}>
       <Card
         sx={{
@@ -16,22 +16,20 @@ export default function Result() {
       >
         <Outlet />
 
-
       </Card>
       <Link to='current'>current</Link>
       <Link to='day'>day</Link>
-      <Link to='deployed'>deployed</Link>
+      <Link to='week'>week</Link>
       <Button
         variant="contained"
         type='submit'>
         <Link
           style={{
             color: 'inherit',
-            textDecoration: 'none'
+            textDecoration: 'none',
           }}
           to='/forecast'>Try Again</Link>
       </Button>
-
     </Box >
 
   );
