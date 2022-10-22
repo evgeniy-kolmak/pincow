@@ -1,4 +1,4 @@
-import { Drawer, List, ListItem, ListItemIcon, Typography, Divider, Avatar, IconButton } from "@mui/material";
+import { Drawer, List, ListItem, ListItemIcon, Typography, Divider, IconButton } from "@mui/material";
 import { Close, Widgets, LabelImportant, Info, Layers } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
