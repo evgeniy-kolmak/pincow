@@ -60,7 +60,7 @@ export function useWeather(data, forecast) {
     "main": {
       "clouds": currentForecast.clouds.all,
       "pressure": Math.round(currentForecast.main.pressure * 0.750062 ?? null),
-      "visibility": currentForecast.main.pressure.visibility,
+      "visibility": Math.round(currentForecast.visibility / 1000),
       "tempFeels": Math.round(currentForecast.main.feels_like ?? null),
       "pop": Math.round(currentForecast.pop * 100),
       "count": (currentForecast?.rain?.['3h'] || currentForecast?.snow?.['3h']) ?? 0,
