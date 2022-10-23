@@ -21,10 +21,10 @@ export default function Current({ data }) {
               <img src={`../images/icons/${base.iconId}.svg`} />
             </Icon>
             <ListItemText primary={<Typography variant='h4' component='h6'>{base.description}</Typography>} secondary={
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant='h4' component='span'>{base.temp}&deg;</Typography>
-                <Typography>(Ощущается как: {main.tempFeels}&deg;)</Typography>
-              </div>
+              <Typography variant='h4' component='span' sx={{ display: 'flex', alignItems: 'center' }}>
+                {base.temp}&deg;
+                <Typography sx={{ color: '#939693' }}>(Ощущается как: {main.tempFeels}&deg;)</Typography>
+              </Typography>
             } />
           </ListItem>
           <ListItem sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
