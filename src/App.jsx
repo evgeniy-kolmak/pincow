@@ -16,19 +16,25 @@ export default function App() {
   const handleData = data => {
     setWeather(data);
   }
+  const [city, setCity] = useState('Минск');
+  const handleCity = data => {
+    setCity(data);
+  }
+
+  console.log(city);
 
   return (
     <Routes>
       <Route path='/' element={<Singlepage data={weather} />}>
         <Route index element={<Main />} />
         <Route path='about' element={<About />} />
-        <Route path='forecast' element={<Forecast handleData={handleData} />} />
+        <Route path='forecast' element={<Forecast handleData={handleData} handleCity={handleCity} />} />
         <Route path='done' element={<Done />}>
           <Route path='current' element={<Current data={weather} />} />
           <Route path='day' element={<Day data={weather} />} />
           <Route path='week' element={<Week data={weather} />} />
         </Route>
-        <Route path='error' element={<Error />} />
+        <Route path='error' element={<Error data={city} />} />
       </Route>
     </Routes >
 

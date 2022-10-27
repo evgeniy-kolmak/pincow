@@ -4,8 +4,10 @@ import { useState, } from 'react';
 import { Navigate } from 'react-router-dom';
 
 
-export default function Forecast({ handleData }) {
+export default function Forecast(props) {
   const token = 'ed91ab4fb4bd6e64a38a185d33502a50';
+
+  const { handleData, handleCity } = props;
 
   const [success, setSuccess] = useState(null);
 
@@ -15,15 +17,16 @@ export default function Forecast({ handleData }) {
       handleData(response.data);
       setSuccess('success')
     } catch (error) {
-      console.log(error);
-      setSuccess('fail')
+      setSuccess('fail');
+
     }
   }
 
 
   function handleSubmit(e) {
     e.preventDefault();
-    const city = e.target.city.value.trim()
+    const city = e.target.city.value.trim();
+    handleCity(city);
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ru&units=metric&appid=${token}`;
     getData(url);
 
