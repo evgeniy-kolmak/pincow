@@ -1,4 +1,4 @@
-import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp } from '../storage';
+import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp, getTimezone, getTimeInCity } from '../storage';
 import { Commit } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 import { useDate } from "./date";
@@ -11,6 +11,8 @@ export function useWeather(data, forecast) {
 
   console.log(data);
 
+
+  const timezone = getTimezone(data);
   const getIcon = getWeekIcon(arrayForecastHours);
   const getTemp = getWeekTemp(arrayForecastHours);
 
@@ -46,11 +48,15 @@ export function useWeather(data, forecast) {
         hour: 'numeric',
         minute: 'numeric',
       }).slice(12),
+      "timezone": timezone.toString().split('')[0] != '-' && timezone.toString().split('')[0] != 0 ? `(GMT+${timezone})` : `(GMT${timezone})`,
+      "time": getTimeInCity(timezone).slice(12, 17),
+
     },
     'base': {
       "temp": Math.round(currentForecast.main.temp ?? null),
       "description": symbolToUpperCase(currentForecast.weather[0].description),
-      "iconId": currentForecast.weather[0]?.icon,
+      "iconId": currentForecast.weather[0]?.icon
+
     },
     "wind": {
       "direction": getDerectionWind(data),

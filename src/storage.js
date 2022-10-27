@@ -101,7 +101,17 @@ const storage = {
       result.push(daysWeek[day + i])
     }
     return result;
-  }
+  },
+  getTimezone: data => data?.city.timezone / (3.6 * 10 ** 6) * 1000,
+
+  getTimeInCity: timezone => {
+    const date = new Date();
+    const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+    const time = new Date(utc + (3600000 * timezone));
+
+    return time.toLocaleString();
+  },
+
 };
 
 export const getDerectionWind = storage.getDerectionWind;
@@ -109,3 +119,5 @@ export const symbolToUpperCase = storage.symbolToUpperCase;
 export const getWeekIcon = storage.getWeekIcon;
 export const getWeekTemp = storage.getWeekTemp;
 export const getListdaysWeek = storage.getListdaysWeek;
+export const getTimezone = storage.getTimezone;
+export const getTimeInCity = storage.getTimeInCity;

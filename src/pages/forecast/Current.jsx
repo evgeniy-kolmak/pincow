@@ -1,6 +1,6 @@
 import { useWeather } from "../../hook/weather";
 import { Typography, Icon, List, ListItem, Tooltip, ListItemText, Box } from '@mui/material';
-import { North, Air, Compress, WbTwilight, WbSunny, People, FilterDrama, Opacity, Grain, FormatColorReset, Visibility, FiberManualRecord } from '@mui/icons-material';
+import { North, Air, Compress, WbTwilight, WbSunny, People, FilterDrama, Opacity, Grain, FormatColorReset, Visibility, FiberManualRecord, AccessTime } from '@mui/icons-material';
 export default function Current({ data }) {
   const { city, base, wind, main } = useWeather(data, 'current');
   return (
@@ -8,7 +8,12 @@ export default function Current({ data }) {
       <Typography variant='h2' >Текущий прогноз</Typography>
       <List>
         <ListItem sx={{ display: 'block' }}>
-          <Typography sx={{ mb: 0.5 }} variant='h3' component='h6'>{city.name} | {city.country}</Typography>
+          <Typography sx={{ mb: 0.5 }} variant='h3' component='h6'>{city.name} | {city.country}  </Typography>
+          <Tooltip title="Текущее время в городе" placement="bottom-start">
+            <Typography sx={{ display: 'flex', alignItems: 'center', mb: 0.6, fontSize: 24, fontWeight: 600 }}>
+              <AccessTime sx={{ mr: 0.5, fontSize: 32 }} />{city.time} {city.timezone}
+            </Typography>
+          </Tooltip>
           <Tooltip title="Население" placement="bottom-start">
             <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: 17 }}>
               <People sx={{ mr: 0.5, fontSize: 26 }} />{city.population} человек
