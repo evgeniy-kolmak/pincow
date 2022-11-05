@@ -31,7 +31,7 @@ export function useWeather(data, forecast) {
 
 
   const getJsxWeek = getIcon.map((item, i) => (
-    <Box Box key={i} >
+    <Box key={i} >
       <Box sx={{ display: 'flex', alignItems: 'center', mt: 1.5, ml: 3.5 }}>
         <Typography sx={{ width: 32, fontSize: 27 }} variant='h5' component='p'>{dayWeek[i]}:</Typography>
         <Icon sx={{ fontSize: 60, mr: 3, ml: 3 }}>
