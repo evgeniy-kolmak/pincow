@@ -1,6 +1,6 @@
 import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp, getTimezone, getTimeInCity } from '../storage';
 import { Commit } from '@mui/icons-material';
-import { Typography } from '@mui/material';
+import { Icon, Typography, Box, Divider } from '@mui/material';
 import { useDate } from "./date";
 
 export function useWeather(data, forecast) {
@@ -9,9 +9,6 @@ export function useWeather(data, forecast) {
   const currentForecast = data?.list[0];
   const arrayForecastHours = data?.list;
 
-  console.log(data);
-
-
   const timezone = getTimezone(data);
   const getIcon = getWeekIcon(arrayForecastHours);
   const getTemp = getWeekTemp(arrayForecastHours);
@@ -19,20 +16,33 @@ export function useWeather(data, forecast) {
   const getJsxDay = arrayForecastHours
     .filter((item, i) => (1 <= i && i <= 8))
     .map((item, i) => (
-      <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }} key={i}>
-        <div>{item.dt_txt.slice(11, 16)}</div>
-        < img src={`../images/icons/${item.weather[0].icon}.svg`} />
-        <div>{Math.round(item.main.temp)}&deg;</div>
-      </div>
+      <Box sx={{ display: 'flex', alignItems: 'center', width: 'max-content' }} key={i}>
+        <Divider sx={{ mr: 2 }} orientation="vertical" variant="middle" flexItem />
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }} >
+          <Typography variant="h6" sx={{ fontSize: 18 }} >{item.dt_txt.slice(11, 16)}</Typography>
+          <Icon sx={{ fontSize: 50, mt: 1.2, mb: 1.2 }}>
+            <img src={`../images/icons/${item.weather[0].icon}.svg`} />
+          </Icon>
+          <Typography variant="h6" sx={{ fontSize: 16 }}>{Math.round(item.main.temp)}&deg;</Typography>
+        </Box>
+        <Divider sx={{ ml: 2 }} orientation="vertical" variant="middle" flexItem />
+      </Box>
     ));
 
 
   const getJsxWeek = getIcon.map((item, i) => (
-    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '200px' }}>
-      <Typography variant='h5' component='p'>{dayWeek[i]}</Typography>
-      < img src={`../images/icons/${item}d.svg`} />
-      <Typography variant='h5' component='span'>{getTemp[i].maxTemp}&deg;</Typography> <Commit /> <Typography variant='h5' component='span'>{getTemp[i].minTemp}&deg;</Typography>
-    </div>
+    <Box Box key={i} >
+      <Box sx={{ display: 'flex', alignItems: 'center', mt: 1.5, ml: 3.5 }}>
+        <Typography sx={{ width: 32, fontSize: 27 }} variant='h5' component='p'>{dayWeek[i]}:</Typography>
+        <Icon sx={{ fontSize: 60, mr: 3, ml: 3 }}>
+          <img src={`../images/icons/${item}d.svg`} />
+        </Icon>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant='h5' component='span'>{getTemp[i].maxTemp}&deg;</Typography> <Commit sx={{ mr: 0.6, ml: 0.6 }} /> <Typography variant='h5' component='span'>{getTemp[i].minTemp}&deg;</Typography>
+        </Box>
+      </Box>
+      <Divider sx={{ mt: 0.5 }} />
+    </Box >
   ));
 
   const getCurrent = {
@@ -48,7 +58,7 @@ export function useWeather(data, forecast) {
         hour: 'numeric',
         minute: 'numeric',
       }).slice(12),
-      "timezone": timezone.toString().split('')[0] != '-' && timezone.toString().split('')[0] != 0 ? `(GMT+${timezone})` : `(GMT${timezone})`,
+      "timezone": timezone.toString().split('')[0] !== '-' && timezone.toString().split('')[0] !== 0 ? `(GMT+${timezone})` : `(GMT${timezone})`,
       "time": getTimeInCity(timezone).slice(12, 17),
 
     },
@@ -78,6 +88,7 @@ export function useWeather(data, forecast) {
     case 'current': return getCurrent
     case 'day': return getJsxDay
     case 'week': return getJsxWeek
+    default: return getCurrent
   }
 
 
