@@ -36,7 +36,7 @@ export default function Main() {
         </ListItem>
         <ListItem>
           <ListItemText
-            primary={<Typography variant='h6' component='p'>Ниже карта с твоим местоположением - кординаты нужны для определения текущего прогноза.</Typography>}
+            primary={<Typography variant='h6' component='p'>Ниже карта с вашим местоположением - кординаты нужны для определения текущего прогноза.</Typography>}
             secondary={<Typography color="#ccc">По желанию,  вы можете запретить его использование.</Typography>}
           />
         </ListItem>
