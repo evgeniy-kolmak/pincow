@@ -1,4 +1,4 @@
-import { getListdaysWeek } from '../storage';
+import { getListdaysWeek, getTimeOfDay } from '../storage';
 
 export function useDate() {
   const date = new Date();
@@ -9,8 +9,10 @@ export function useDate() {
     year: 'numeric'
   });
 
+
   return {
     dayWeek: getListdaysWeek(date),
     currentDateString: dateString,
+    greeting: getTimeOfDay(date),
   }
 }

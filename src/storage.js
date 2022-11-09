@@ -111,6 +111,18 @@ const storage = {
 
     return time.toLocaleString();
   },
+  getTimeOfDay: date => {
+    const hour = date.getHours();
+    if (4 <= hour && hour <= 11) {
+      return 'Доброе утро';
+    } else if (12 <= hour && hour <= 18) {
+      return 'Добрый день';
+    } else if (19 <= hour && hour <= 23) {
+      return 'Добрый вечер';
+    } else {
+      return 'Доброй ночи';
+    }
+  }
 
 };
 
@@ -121,3 +133,4 @@ export const getWeekTemp = storage.getWeekTemp;
 export const getListdaysWeek = storage.getListdaysWeek;
 export const getTimezone = storage.getTimezone;
 export const getTimeInCity = storage.getTimeInCity;
+export const getTimeOfDay = storage.getTimeOfDay;
