@@ -46,7 +46,7 @@ export default function Main() {
       <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', mt: 0.6, fontSize: 14 }}> <DoNotTouch sx={{ mr: 0.4 }} fontSize="small" color='error' />Примечание: Мы не отслеживаем и не храним данные.</Typography>
       <List>
         <ListItem>
-          <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: 18 }} >Для дальнейшего взаимодествия: Открой меню <Menu fontSize="large" sx={{ ml: 0.3, mr: 0.3 }} /> и выбери <Layers fontSize="large" sx={{ ml: 0.3, mr: 0.3 }} /> "Прогноз".</Typography>
+          <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: 18 }} >Для дальнейшего взаимодействия: Открой меню <Menu fontSize="large" sx={{ ml: 0.3, mr: 0.3 }} /> и выбери <Layers fontSize="large" sx={{ ml: 0.3, mr: 0.3 }} /> "Прогноз".</Typography>
         </ListItem>
       </List>
     </Box>
