@@ -64,7 +64,7 @@ export default function Current({ data }) {
               <Opacity sx={{ ml: 0.7, mr: 0.5, fontSize: 30 }} />{main.humidity}%
             </Typography>
           </Tooltip>
-          <Tooltip title="Влероятность осадков" placement="bottom-start">
+          <Tooltip title="Вероятность осадков" placement="bottom-start">
             <Typography sx={{ display: 'flex', alignItems: 'center', fontSize: 17 }}>
               <FormatColorReset sx={{ ml: 0.7, mr: 0.5, fontSize: 30 }} />{main.pop}%
             </Typography>
