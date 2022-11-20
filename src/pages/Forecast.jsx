@@ -76,6 +76,7 @@ export default function Forecast(props) {
     <Box
       sx={{
         bgcolor: '#fff',
+        borderRadius: 3
       }}
     >
       <List>

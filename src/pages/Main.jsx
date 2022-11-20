@@ -9,6 +9,7 @@ export default function Main() {
     <Box
       sx={{
         bgcolor: '#fff',
+        borderRadius: 3
       }}
     >
       <List>
