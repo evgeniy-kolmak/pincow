@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import Loader from "../components/Loader";
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+import Loader from "./Loader";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { Box, Typography } from '@mui/material';
 import { WrongLocation } from '@mui/icons-material';
 
-
-export default function Map({ size }) {
-  const [width, height] = size;
+export default function Map() {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [coords, setCoords] = useState(null);
 
@@ -38,7 +36,7 @@ export default function Map({ size }) {
         padding: '0px 3%'
       }}
     >
-      {!isPageLoading ? <MapContainer style={{ width: width, height: height }} center={coords} zoom={13} scrollWheelZoom={false}>
+      {!isPageLoading ? <MapContainer style={{ width: '100%', height: '380px' }} center={coords} zoom={13} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -48,6 +46,7 @@ export default function Map({ size }) {
             Вы здесь!
           </Popup>
         </Marker>
+
       </MapContainer > : <Box
         sx={{
           display: 'flex',

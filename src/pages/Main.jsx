@@ -41,7 +41,7 @@ export default function Main() {
           />
         </ListItem>
       </List>
-      <Map size={['100%', '380px']} />
+      <Map />
 
       <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', mt: 0.6, fontSize: 14 }}> <DoNotTouch sx={{ mr: 0.4 }} fontSize="small" color='error' />Примечание: Мы не отслеживаем и не храним данные.</Typography>
       <List>
