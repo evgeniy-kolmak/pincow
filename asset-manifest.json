@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/pincow/static/css/main.2e4996e6.css",
-    "main.js": "/pincow/static/js/main.3ea603f9.js",
+    "main.js": "/pincow/static/js/main.e25c08e0.js",
     "index.html": "/pincow/index.html",
     "main.2e4996e6.css.map": "/pincow/static/css/main.2e4996e6.css.map",
-    "main.3ea603f9.js.map": "/pincow/static/js/main.3ea603f9.js.map"
+    "main.e25c08e0.js.map": "/pincow/static/js/main.e25c08e0.js.map"
   },
   "entrypoints": [
     "static/css/main.2e4996e6.css",
-    "static/js/main.3ea603f9.js"
+    "static/js/main.e25c08e0.js"
   ]
 }
