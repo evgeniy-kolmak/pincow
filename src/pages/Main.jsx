@@ -31,7 +31,11 @@ export default function Main() {
                   mr: 1,
                   mb: 1,
                   borderRadius: 1.2,
-                  fontSize: 30,
+                  fontSize: {
+                    md: 30,
+                    sm: 26,
+                    xs: 22
+                  },
                   fontFamily: 'monospace',
                   fontWeight: 700,
                   letterSpacing: '.2rem',
@@ -41,14 +45,28 @@ export default function Main() {
                 }}>pincow</Typography>
             </Grid>
             <Grid item md={8} sm={8} xs={12}>
-              <Typography fontSize={16}>Небольшое приложение, предоставляющие данные о погоде.</Typography>
+              <Typography sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}>Небольшое приложение, предоставляющие данные о погоде.</Typography>
             </Grid>
           </Grid>
         </ListItem>
         <ListItem>
           <ListItemText
             primary={<Typography variant='h6' component='p'>Ниже карта с вашим местоположением - кординаты нужны для определения текущего прогноза.</Typography>}
-            secondary={<Typography color="#ccc">По желанию,  вы можете запретить его использование.</Typography>}
+            secondary={<Typography sx={{
+              fontSize: {
+                md: 16,
+                sm: 15,
+                xs: 14
+              },
+              color: "#ccc"
+            }}>
+              По желанию,  вы можете запретить его использование.</Typography>}
           />
         </ListItem>
         <Map />
@@ -59,10 +77,42 @@ export default function Main() {
           >
             <Typography sx={{ mr: 1 }} variant="h6" component="p">Для дальнейшего взаимодействия:</Typography >
             <Grid sx={{ display: 'flex', alignItems: 'center' }} item lg={2} md={2.5} sm={4.5} xs={12}>
-              <Typography>Откройте меню</Typography><Menu fontSize="large" sx={{ ml: 0.5, mr: 0.5 }} />
+              <Typography sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}>Откройте меню</Typography>
+              <Menu
+                sx={{
+                  ml: 0.5,
+                  mr: 0.5,
+                  fontSize: {
+                    md: 35,
+                    sm: 30,
+                    xs: 25
+                  },
+                }} />
             </Grid>
             <Grid sx={{ display: 'flex', alignItems: 'center' }} item md={4} sm={6} xs={12}>
-              <Typography> и выберите "Прогноз"</Typography><Layers fontSize="large" sx={{ ml: 0.5, mr: 0.5 }} />
+              <Typography sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}> и выберите "Прогноз"</Typography>
+              <Layers
+                sx={{
+                  ml: 0.5,
+                  mr: 0.5,
+                  fontSize: {
+                    md: 35,
+                    sm: 30,
+                    xs: 25
+                  },
+                }} />
             </Grid>
           </Grid>
         </ListItem>
