@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export function usePosition() {
-  const token = 'ed91ab4fb4bd6e64a38a185d33502a50';
+  const token = process.env.REACT_APP_TOKEN;
 
   const [currentPosition, setCurrentPosition] = useState(
     {

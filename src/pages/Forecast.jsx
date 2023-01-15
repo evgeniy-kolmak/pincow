@@ -8,16 +8,18 @@ import Loader from '../components/Loader';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { WrongLocation, Announcement, LowPriority } from '@mui/icons-material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 export default function Forecast(props) {
-  const token = 'ed91ab4fb4bd6e64a38a185d33502a50';
+  const token = process.env.REACT_APP_TOKEN;
   const { handleData, handleCity } = props;
   const [success, setSuccess] = useState(null);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [coords, setCoords] = useState(null);
   const [clickMap, setClickMap] = useState(false);
   const [city, setCity] = useState(false);
+  const matches = useMediaQuery('@media (max-width:600px)');
 
 
   useEffect(() => {
@@ -95,7 +97,7 @@ export default function Forecast(props) {
         width: '100%',
         padding: '0px 3%'
       }}>
-        <MapContainer style={{ width: '100%', height: '380px' }} center={coords} zoom={17} >
+        <MapContainer style={{ width: '100%', height: matches ? '280px' : '380px' }} center={coords} zoom={17} >
           <Click handleClickMap={handleClickMap} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -112,7 +114,7 @@ export default function Forecast(props) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '380px',
+            height: matches ? '280px' : '380px',
             width: '100%',
             background: 'linear-gradient(to right, #2b5876, #4e4376)',
             backgroundSize: '400%, 400%',
@@ -121,7 +123,7 @@ export default function Forecast(props) {
           }}>
         <Loader />
         <Typography variant="h5" sx={{ display: 'flex', alignItems: 'center', color: '#fff', mt: 2, }}><WrongLocation sx={{ mr: 0.8, fontSize: 28 }} /> Поиск геопозиции</Typography>
-        <Typography sx={{ color: '#fff', mt: 0.65, fontSize: 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
+        <Typography sx={{ color: '#fff', mt: 0.65, pr: 1, pl: 1, fontSize: matches ? 13 : 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
       </Box>}
       <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', mt: 0.6, fontSize: 14 }}> <LowPriority sx={{ mr: 0.4 }} fontSize="small" color='error' />Карта имеет больший приоритет, но меньшую точность. </Typography>
       <Typography sx={{ textAlign: 'center' }} variant='h4' component='p'>или</Typography>
