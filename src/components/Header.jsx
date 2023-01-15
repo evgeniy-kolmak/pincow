@@ -1,14 +1,14 @@
 import { AppBar, Toolbar, IconButton, Typography, Box, Icon, Tooltip } from '@mui/material';
-import { useDate } from '../hook/date';
 import { usePosition } from '../hook/positionWeather';
 import { Menu, FiberPin, NearMe, CalendarMonth } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Header({ handleMenu }) {
-  const { currentDateString } = useDate();
   const { temp, cityName, iconId } = usePosition();
+  const matchesMD = useMediaQuery('@media (max-width:900px)');
+  const matchesSM = useMediaQuery('@media (max-width:600px)');
+  const matchesS = useMediaQuery('@media (max-width:450px)');
   return (
     <AppBar position='static'>
       <Toolbar >
@@ -21,7 +21,11 @@ export default function Header({ handleMenu }) {
               variant="h5"
               component="span"
               sx={{
-                ml: 1,
+                ml: {
+                  md: 1,
+                  sm: 0.8,
+                  xs: 0.6
+                },
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.4rem',
@@ -42,41 +46,73 @@ export default function Header({ handleMenu }) {
             justifyContent: 'space-between',
           }}
         >
-          <Typography
+          <Box
             sx={{
-              fontSize: '17px'
+              display: 'flex'
             }}
-          >
-            <CalendarMonth
-              sx={{
-                verticalAlign: 'middle',
-                mr: 0.8
-              }}
-            />Сегодня {currentDateString} </Typography>
+          >{matchesSM ? null
+            :
+            <>
+              <CalendarMonth
+                sx={{
+                  verticalAlign: 'middle',
+                  mr: 0.8
+                }}
+              />
+              <Typography >Сегодня {new Date().toLocaleDateString('ru', {
+                day: 'numeric',
+                month: matchesMD ? 'numeric' : 'long',
+                year: 'numeric'
+              })} </Typography>
+            </>
+            }</Box>
           <Typography
             variant="h6"
             component="span"
             sx={{
-              ml: 4,
+              ml: {
+                md: 4,
+                sm: 3,
+                xs: 2
+              },
               display: 'flex',
               alignItems: 'center'
             }}>
-            <NearMe sx={{ mr: 0.8 }} />
+            {matchesS ? null : <NearMe sx={{ mr: 0.8 }} />}
             {cityName} {temp} &deg;
-            <Icon sx={{ fontSize: 40, ml: 1.3 }}>
+            <Icon sx={{
+              fontSize: {
+                md: 40,
+                sm: 35,
+                xs: 30
+              },
+              ml: {
+                md: 0.6,
+                sm: 0.5,
+                xs: 0.4
+              }
+            }}>
               <img src={`images/icons/${iconId}.svg`} />
             </Icon>
           </Typography>
         </Box>
         <Tooltip title="Oткрыть меню">
           <IconButton onClick={handleMenu}>
-            <Menu fontSize='large' sx={{ ml: 5, color: "#fff" }} />
+            <Menu sx={{
+              fontSize: {
+                md: 35,
+                sm: 30,
+                xs: 25
+              },
+              ml: {
+                md: 5,
+                sm: 3,
+                xs: 1.8
+              }, color: "#fff"
+            }} />
           </IconButton>
         </Tooltip>
       </Toolbar>
     </AppBar >
-
   );
-
-
 }
