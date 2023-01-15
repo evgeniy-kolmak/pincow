@@ -5,10 +5,13 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Box, Typography } from '@mui/material';
 import { WrongLocation } from '@mui/icons-material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 export default function Map() {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [coords, setCoords] = useState(null);
+  const matches = useMediaQuery('@media (max-width:600px)');
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -16,14 +19,12 @@ export default function Map() {
       const lon = position.coords.longitude;
       setCoords([lat, lon]);
       coords ? setIsPageLoading(true) : setIsPageLoading(false);
-
     })
-
   }, [])
 
   const markerIcon = new L.Icon({
     iconUrl: '/images/location.svg',
-    iconSize: [50, 65],
+    iconSize: [matches ? 40 : 50, matches ? 55 : 65],
     popupAnchor: [0, -25]
   });
 
@@ -36,7 +37,7 @@ export default function Map() {
         padding: '0px 3%'
       }}
     >
-      {!isPageLoading ? <MapContainer style={{ width: '100%', height: '380px' }} center={coords} zoom={13} scrollWheelZoom={false}>
+      {!isPageLoading ? <MapContainer style={{ width: '100%', height: matches ? '280px' : '380px' }} center={coords} zoom={13} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -52,7 +53,7 @@ export default function Map() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '380px',
+          height: matches ? '280px' : '380px',
           width: '100%',
           background: 'linear-gradient(to right, #2b5876, #4e4376)',
           backgroundSize: '400%, 400%',
@@ -61,7 +62,7 @@ export default function Map() {
         }}>
         <Loader />
         <Typography variant="h5" sx={{ display: 'flex', alignItems: 'center', color: '#fff', mt: 2, }}><WrongLocation sx={{ mr: 0.8, fontSize: 28 }} /> Поиск геопозиции</Typography>
-        <Typography sx={{ color: '#fff', mt: 0.65, fontSize: 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
+        <Typography align="center" sx={{ color: '#fff', mt: 0.65, pr: 1, pl: 1, fontSize: matches ? 13 : 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
       </Box>}
     </Box>
 
