@@ -122,7 +122,13 @@ export default function Forecast(props) {
             flexDirection: 'column',
           }}>
         <Loader />
-        <Typography variant="h5" sx={{ display: 'flex', alignItems: 'center', color: '#fff', mt: 2, }}><WrongLocation sx={{ mr: 0.8, fontSize: 28 }} /> Поиск геопозиции</Typography>
+        <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: '#fff', mt: 2, }}><WrongLocation sx={{
+          mr: 0.8, fontSize: {
+            md: 26,
+            sm: 23,
+            xs: 20
+          }
+        }} /> Поиск геопозиции</Typography>
         <Typography sx={{ color: '#fff', mt: 0.65, pr: 1, pl: 1, fontSize: matches ? 13 : 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
       </Box>}
       <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', mt: 0.6, fontSize: 14 }}> <LowPriority sx={{ mr: 0.4 }} fontSize="small" color='error' />Карта имеет больший приоритет, но меньшую точность. </Typography>
