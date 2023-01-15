@@ -11,9 +11,15 @@ export default function Sidebar(props) {
       open={menuOpen}
       onClose={closeMenu}
     >
-      <List sx={{ width: '400px' }}>
+      <List sx={{
+        width: {
+          md: 400,
+          sm: 320,
+          xs: 220
+        }
+      }}>
         <ListItem>
-          <ListItemIcon>
+          <ListItemIcon >
             <Widgets />
           </ListItemIcon>
           <Typography variant='h4' component='span' sx={{ flexGrow: 1 }}>Меню</Typography>
