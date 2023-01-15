@@ -22,7 +22,7 @@ export default function Main() {
           <Grid container
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <Grid item md={2} sm={3.5} xs={6}>
+            <Grid item md={2} sm={3.5} xs={7.5}>
               <Typography
                 align="center"
                 sx={{
