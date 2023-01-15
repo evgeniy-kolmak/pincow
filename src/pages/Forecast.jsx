@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { TextField, Button, Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Click from '../components/Click';
 import Loader from '../components/Loader';
@@ -36,7 +36,7 @@ export default function Forecast(props) {
 
   const markerIcon = new L.Icon({
     iconUrl: '/images/location.svg',
-    iconSize: [50, 65],
+    iconSize: [matches ? 40 : 50, matches ? 55 : 65],
     popupAnchor: [0, -25]
   });
 
@@ -84,11 +84,58 @@ export default function Forecast(props) {
       <List>
         <ListItem>
           <ListItemText
-            primary={<Typography variant='h4' component='p'>Воспользуйтесь картой для выбора местоположения.</Typography>}
-            secondary={<Typography variant='h6' component='p'>Для более точного определения - используйте "Зум".</Typography>} />
+            primary={
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: 38,
+                    sm: 30,
+                    xs: 25
+                  }
+                }}
+                component='p'>
+                Воспользуйтесь картой для выбора местоположения.
+              </Typography>}
+            secondary={
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: 24,
+                    sm: 20,
+                    xs: 17
+                  },
+                }}
+                component='p'>
+                Для более точного определения - используйте "Зум".
+              </Typography>}
+          />
         </ListItem>
         <ListItem>
-          <Typography sx={{ display: 'flex', alignItems: 'center' }} fontSize={18}><Announcement fontSize='large' sx={{ mr: 0.4 }} color='success' />Координаты вводить не нужно! Все сохраняется в памяти при выборе точки на карте.</Typography>
+          <Grid container
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <Grid sx={{ display: 'flex', justifyContent: 'center' }} item md={0.7} sm={1} xs={12}>
+              <Announcement
+                sx={{
+                  verticalAlign: 'middle',
+                  fontSize: matches ? 42 : 35
+                }}
+                color='success' />
+            </Grid>
+            <Grid item md={10} sm={10} xs={12}>
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: 18,
+                    sm: 17,
+                    xs: 16
+                  }
+                }}
+              >
+                Координаты вводить не нужно! Все сохраняется в памяти при выборе точки на карте.
+              </Typography>
+            </Grid>
+          </Grid>
         </ListItem>
       </List>
       {!isPageLoading ? <Box sx={{
@@ -97,7 +144,13 @@ export default function Forecast(props) {
         width: '100%',
         padding: '0px 3%'
       }}>
-        <MapContainer style={{ width: '100%', height: matches ? '280px' : '380px' }} center={coords} zoom={17} >
+        <MapContainer
+          style={{
+            width: '100%',
+            height: matches ? '280px' : '380px'
+          }}
+          center={coords}
+          zoom={17} >
           <Click handleClickMap={handleClickMap} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -122,17 +175,45 @@ export default function Forecast(props) {
             flexDirection: 'column',
           }}>
         <Loader />
-        <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: '#fff', mt: 2, }}><WrongLocation sx={{
-          mr: 0.8, fontSize: {
-            md: 26,
-            sm: 23,
-            xs: 20
-          }
-        }} /> Поиск геопозиции</Typography>
-        <Typography sx={{ color: '#fff', mt: 0.65, pr: 1, pl: 1, fontSize: matches ? 13 : 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            color: '#fff',
+            mt: 2,
+          }}>
+          <WrongLocation
+            sx={{
+              mr: 0.8,
+              fontSize: {
+                md: 26,
+                sm: 23,
+                xs: 20
+              }
+            }} /> Поиск геопозиции</Typography>
+        <Typography align='center' sx={{ color: '#fff', mt: 0.65, pr: 1, pl: 1, fontSize: matches ? 13 : 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
       </Box>}
-      <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', mt: 0.6, fontSize: 14 }}> <LowPriority sx={{ mr: 0.4 }} fontSize="small" color='error' />Карта имеет больший приоритет, но меньшую точность. </Typography>
-      <Typography sx={{ textAlign: 'center' }} variant='h4' component='p'>или</Typography>
+      <Grid container
+        sx={{ display: 'flex', alignItems: 'center', ml: 2, mt: 0.6, }}
+      >
+        <Grid item md={0.1} sm={0.5} xs={0.8}>
+          <LowPriority sx={{ mr: 0.1, verticalAlign: 'middle' }} fontSize="small" color='error' />
+        </Grid>
+        <Grid item md={10} sm={10} xs={10}>
+          <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', fontSize: 14 }}>Карта имеет больший приоритет, но меньшую точность. </Typography>
+        </Grid>
+      </Grid>
+      <Typography
+        sx={{
+          textAlign: 'center',
+          fontSize: {
+            md: 30,
+            sm: 26,
+            xs: 22
+          }
+        }}
+        component='p'>или</Typography>
       <form onSubmit={handleSubmit}>
         <Box
           sx={{
@@ -141,16 +222,20 @@ export default function Forecast(props) {
             p: '0 2%',
           }}
         >
-          <TextField onChange={handleInput} sx={{ width: '35rem', alignSelf: 'center', m: '15px 0' }} placeholder='Введите город' variant="filled" name='city' type="text" />
-          <Button disabled={!city && !clickMap} sx={{ width: '10rem', mb: 3 }} variant="contained" type='submit'>Отправить</Button>
+          <TextField onChange={handleInput} sx={{ width: '60%', alignSelf: 'center', m: '15px 0' }} placeholder='Введите город' variant="filled" name='city' type="text" />
+          <Button disabled={!city && !clickMap} sx={{ width: '10rem', mb: 3, alignSelf: matches ? 'center' : 'start' }} variant="contained" type='submit'>Отправить</Button>
         </Box>
       </form>
-      {success === "success" && (
-        <Navigate to="/done/current" replace={true} />
-      )}
-      {success === 'fail' && (
-        <Navigate to="/error" replace={true} />
-      )}
-    </Box>
+      {
+        success === "success" && (
+          <Navigate to="/done/current" replace={true} />
+        )
+      }
+      {
+        success === 'fail' && (
+          <Navigate to="/error" replace={true} />
+        )
+      }
+    </Box >
   );
 }
