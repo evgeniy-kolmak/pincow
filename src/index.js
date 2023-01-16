@@ -12,7 +12,46 @@ const theme = createTheme({
     primary: {
       main: '#1F1F28'
     }
-  }
+  },
+  typography: {
+    h2: {
+      "@media(max-width: 900px)": {
+        fontSize: '48px',
+      },
+      "@media(max-width: 600px)": {
+        fontSize: '32px',
+      },
+
+    },
+    h4: {
+      "@media(max-width: 900px)": {
+        fontSize: '32px',
+      },
+      "@media(max-width: 600px)": {
+        fontSize: '28px',
+
+      },
+    },
+    h5: {
+      "@media(max-width: 900px)": {
+        fontSize: '22px',
+      },
+      "@media(max-width: 600px)": {
+        fontSize: '20px',
+
+      },
+    },
+    h6: {
+      "@media(max-width: 900px)": {
+        fontSize: '18px',
+      },
+      "@media(max-width: 600px)": {
+        fontSize: '16px',
+
+      },
+    },
+  },
+
 });
 
 
