@@ -1,22 +1,23 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Card, Box, Button, SpeedDialAction, SpeedDial } from '@mui/material';
-import { KeyboardBackspace, ZoomInMap, Filter1, Filter5 } from '@mui/icons-material';
+import { Segment, ZoomInMap, Filter1, Filter5 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
 
 const actions = [
-  { icon: <Filter5 />, name: 'На 5 дней', path: 'week' },
-  { icon: <Filter1 />, name: 'На сутки', path: 'day' },
-  { icon: <ZoomInMap />, name: 'Сейчас', path: 'current' },
+  { icon: <Filter5 sx={{ fontSize: { md: 22, xs: 17 } }} />, name: 'На 5 дней', path: 'week' },
+  { icon: <Filter1 sx={{ fontSize: { md: 22, xs: 17 } }} />, name: 'На сутки', path: 'day' },
+  { icon: <ZoomInMap sx={{ fontSize: { md: 22, xs: 17 } }} />, name: 'Сейчас', path: 'current' },
 ];
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   position: 'absolute',
-  '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
-    right: theme.spacing(5),
+  '&.MuiSpeedDial-directionLeft': {
+    right: theme.spacing(4),
   },
 
 }));
+
 
 export default function Done() {
   const navigate = useNavigate();
@@ -29,22 +30,46 @@ export default function Done() {
       <Card
         sx={{
           maxWidth: "100%",
-          padding: "30px",
+          p: {
+            md: 5,
+            sm: 3,
+            xs: 1.5
+          }
+
         }}
       >
         <Outlet />
 
       </Card>
 
-      <Box sx={{ position: 'relative', mt: 3, height: 100 }}>
+      <Box sx={{
+        position: 'relative',
+        height: 90,
+        top: 16,
+        left: {
+          md: 8,
+          sm: 20,
+          xs: 27
+        },
+
+      }}>
         <StyledSpeedDial
           direction='left'
           ariaLabel="Navigation cards"
-
-          icon={<KeyboardBackspace />}
+          icon={<Segment />}
         >
           {actions.map((action) => (
             <SpeedDialAction
+              sx={{
+                width: {
+                  md: 45,
+                  sx: 35,
+                },
+                height: {
+                  md: 45,
+                  sx: 35,
+                }
+              }}
               key={action.name}
               icon={action.icon}
               tooltipTitle={action.name}
@@ -52,18 +77,18 @@ export default function Done() {
             />
           ))}
         </StyledSpeedDial>
-        <Button
-          variant="contained"
-          sx={{ width: 'max-content' }}
-          type='submit'>
-          <Link
-            style={{
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-            to='/forecast'>Выбрать город</Link>
-        </Button>
       </Box>
+      <Button
+        variant="contained"
+        sx={{ width: 'max-content' }}
+        type='submit'>
+        <Link
+          style={{
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+          to='/forecast'>Выбрать город</Link>
+      </Button>
     </Box >
 
   );
