@@ -222,8 +222,29 @@ export default function Forecast(props) {
             p: '0 2%',
           }}
         >
-          <TextField onChange={handleInput} sx={{ width: '60%', alignSelf: 'center', m: '15px 0' }} placeholder='Введите город' variant="filled" name='city' type="text" />
-          <Button disabled={!city && !clickMap} sx={{ width: '10rem', mb: 3, alignSelf: matches ? 'center' : 'start' }} variant="contained" type='submit'>Отправить</Button>
+          <TextField
+            onChange={handleInput}
+            size='small'
+            sx={{
+              width: '60%',
+              alignSelf: 'center',
+              m: '15px 0'
+            }}
+            placeholder='Введите город'
+            variant="standard"
+            name='city'
+            type="text" />
+          <Button
+            disabled={!city && !clickMap}
+            sx={{
+              width: '10rem',
+              mb: 3,
+              alignSelf: matches ? 'center' : 'start'
+            }}
+            variant="contained"
+            type='submit'>
+            Отправить
+          </Button>
         </Box>
       </form>
       {
