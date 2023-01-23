@@ -1,6 +1,6 @@
 import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp, getTimezone, getTimeInCity } from '../storage';
 import { Commit } from '@mui/icons-material';
-import { Icon, Typography, Box, Divider } from '@mui/material';
+import { Icon, Typography, Box, Divider, Grid } from '@mui/material';
 import { useDate } from "./date";
 
 export function useWeather(data, forecast) {
@@ -16,17 +16,70 @@ export function useWeather(data, forecast) {
   const getJsxDay = arrayForecastHours
     .filter((item, i) => (1 <= i && i <= 8))
     .map((item, i) => (
-      <Box sx={{ display: 'flex', alignItems: 'center', width: 'max-content' }} key={i}>
-        <Divider sx={{ mr: 2 }} orientation="vertical" variant="middle" flexItem />
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }} >
-          <Typography variant="h6" sx={{ fontSize: 18 }} >{item.dt_txt.slice(11, 16)}</Typography>
-          <Icon sx={{ fontSize: 50, mt: 1.2, mb: 1.2 }}>
-            <img src={`../images/icons/${item.weather[0].icon}.svg`} />
+      <Grid container
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          width: 'max-content'
+
+        }}
+        key={i}>
+        <Divider
+          // sx={{
+          //   mr: 2
+          // }}
+          orientation="vertical"
+          variant="middle"
+          flexItem />
+        <Grid item
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            p: 4
+          }} >
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: {
+                md: 19,
+                sm: 18,
+                xs: 17
+              }
+            }} >
+            {item.dt_txt.slice(11, 16)}
+          </Typography>
+          <Icon
+            sx={{
+              fontSize: {
+                md: 50,
+                sm: 45,
+                xs: 40
+              },
+              m: '0.8rem 0'
+            }}>
+            <img src={`../images/icons/${item.weather[0].icon}.svg`} alt='' />
           </Icon>
-          <Typography variant="h6" sx={{ fontSize: 16 }}>{Math.round(item.main.temp)}&deg;</Typography>
-        </Box>
-        <Divider sx={{ ml: 2 }} orientation="vertical" variant="middle" flexItem />
-      </Box>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: {
+                md: 17,
+                sm: 16,
+                xs: 15
+              }
+            }}>
+            {Math.round(item.main.temp)}&deg;
+          </Typography>
+        </Grid>
+        <Divider
+          // sx={{
+          //   ml: 2
+          // }}
+          orientation="vertical"
+          variant="middle"
+          flexItem />
+      </Grid>
     ));
 
 
@@ -92,7 +145,8 @@ export function useWeather(data, forecast) {
       <Divider
         sx={{
           mt: 0.5
-        }} />
+        }}
+      />
     </Box >
   ));
 
