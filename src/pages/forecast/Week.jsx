@@ -8,7 +8,7 @@ export default function Week({ data }) {
     <Box>
       <Grid container spacing={1}>
         <Grid item>
-          <Typography variant='h3' component='p'><span style={{ fontWeight: 500 }}>{city}:</span></Typography>
+          <Typography variant='h3' component='p'><span style={{ fontWeight: 400 }}>{city}:</span></Typography>
         </Grid>
         <Grid item>
           <Typography variant='h3' component='p'>
