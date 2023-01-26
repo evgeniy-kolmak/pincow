@@ -29,7 +29,11 @@ export default function SinglePage({ data }) {
         sx={{
           backgroundColor: '#1E1E1E',
           minHeight: `calc(100vh - ${matches ? 56 : 64}px)`,
-          padding: '40px',
+          padding: {
+            md: 5,
+            sm: 4,
+            sx: 3
+          }
         }}
       >
         <Outlet />
