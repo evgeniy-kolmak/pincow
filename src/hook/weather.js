@@ -25,9 +25,6 @@ export function useWeather(data, forecast) {
         }}
         key={i}>
         <Divider
-          // sx={{
-          //   mr: 2
-          // }}
           orientation="vertical"
           variant="middle"
           flexItem />
@@ -73,9 +70,6 @@ export function useWeather(data, forecast) {
           </Typography>
         </Grid>
         <Divider
-          // sx={{
-          //   ml: 2
-          // }}
           orientation="vertical"
           variant="middle"
           flexItem />
