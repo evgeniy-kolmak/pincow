@@ -68,7 +68,7 @@ export default function Error({ data }) {
                 },
                 cursor: 'pointer'
               }}>
-              <a href={`http://google.com/search?q=${city}`} target="_blank">{city}</a>
+              <a href={`http://google.com/search?q=${city}`} target="_blank" rel='noreferrer'>{city}</a>
             </Typography>
             <FormatQuote
               sx={{

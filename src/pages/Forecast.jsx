@@ -30,7 +30,7 @@ export default function Forecast(props) {
       coords ? setIsPageLoading(true) : setIsPageLoading(false);
 
     })
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

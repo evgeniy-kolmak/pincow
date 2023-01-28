@@ -20,6 +20,7 @@ export default function Map() {
       setCoords([lat, lon]);
       coords ? setIsPageLoading(true) : setIsPageLoading(false);
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const markerIcon = new L.Icon({

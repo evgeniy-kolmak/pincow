@@ -12,7 +12,6 @@ export function usePosition() {
     }
   );
 
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       const lat = position.coords.latitude;
@@ -26,8 +25,8 @@ export function usePosition() {
             'iconId': res?.data.weather[0].icon
           });
         })
-
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

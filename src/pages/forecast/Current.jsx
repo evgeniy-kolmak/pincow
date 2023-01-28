@@ -23,7 +23,7 @@ export default function Current({ data }) {
         <Box sx={{ border: '0.15rem solid #ccc', borderRadius: '18px', width: 'max-content' }}>
           <ListItem >
             <Icon sx={{ fontSize: 90, mr: 1 }}>
-              <img src={`../images/icons/${base.iconId}.svg`} />
+              <img src={`../images/icons/${base.iconId}.svg`} alt='' />
             </Icon>
             <ListItemText primary={<Typography variant='h4' component='h6'>{base.description}</Typography>} secondary={
               <Typography variant='h4' component='span' sx={{ display: 'flex', alignItems: 'center' }}>

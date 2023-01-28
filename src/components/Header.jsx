@@ -29,7 +29,6 @@ export default function Header({ handleMenu }) {
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.4rem',
-                color: 'inherit',
                 textDecoration: 'none',
                 textTransform: 'uppercase',
                 color: '#ede8e8',
@@ -92,7 +91,7 @@ export default function Header({ handleMenu }) {
                 xs: 0.4
               }
             }}>
-              <img src={`images/icons/${iconId}.svg`} />
+              <img src={`images/icons/${iconId}.svg`} alt='' />
             </Icon>
           </Typography>
         </Box>

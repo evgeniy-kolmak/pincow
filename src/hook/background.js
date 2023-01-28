@@ -24,7 +24,7 @@ export function useBackground(data, currentIconId) {
     '50n': 'linear-gradient(to left, #485563, #29323c)',
   };
   const [color, setColor] = useState(colors[currentIconId]);
-  useEffect(() => setColor(colors[iconId] ?? colors[currentIconId]), [iconId, currentIconId])
+  useEffect(() => setColor(colors[iconId] ?? colors[currentIconId]), [iconId, currentIconId]); // eslint-disable-line
 
   return color;
 
