@@ -1,0 +1,25 @@
+name: Deploy
+on: 
+  push:
+    branches: 
+      - main
+jobs: 
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Setup key
+        run: | 
+         set -eu
+         mkdir "$HOME/.ssh"
+         echo "${{secrets.key}}" > "$HOME/.ssh/key"
+         chmod 600 "$HOME/.ssh/key"
+      - name: Installation of dependencies
+        run: npm ci
+      - name: Creating an environment file
+        run: echo "REACT_APP_TOKEN = ${{secrets.token}}" > .env
+      - name: Build app
+        run: npm run build
+      - name: Deployment app
+        run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1916380@37.140.192.11:/var/www/u1916380/data/www/pincow.xyz
