@@ -1,5 +1,5 @@
 import Singlepage from './components/Singlepage';
-import { Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
 import Main from './pages/Main';
 import About from './pages/About';
 import Forecast from './pages/Forecast';
@@ -21,9 +21,8 @@ export default function App() {
     setCity(data);
   }
 
-
-  return (
-    <Routes>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
       <Route path='/' element={<Singlepage data={weather} />}>
         <Route index element={<Main />} />
         <Route path='about' element={<About />} />
@@ -35,7 +34,13 @@ export default function App() {
         </Route>
         <Route path='error' element={<Error city={city} />} />
       </Route>
-    </Routes >
+    )
+  );
+
+
+  return (
+
+    <RouterProvider router={router} />
 
   );
 }
