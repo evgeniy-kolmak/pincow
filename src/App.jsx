@@ -16,7 +16,7 @@ export default function App() {
   const handleData = data => {
     setWeather(data);
   }
-  const [city, setCity] = useState('Минск');
+  const [city, setCity] = useState();
   const handleCity = data => {
     setCity(data);
   }
@@ -33,7 +33,7 @@ export default function App() {
           <Route path='day' element={<Day data={weather} />} />
           <Route path='week' element={<Week data={weather} />} />
         </Route>
-        <Route path='error' element={<Error data={city} />} />
+        <Route path='error' element={<Error city={city} />} />
       </Route>
     </Routes >
 

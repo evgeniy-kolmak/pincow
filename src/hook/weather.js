@@ -14,8 +14,8 @@ export function useWeather(data, forecast) {
   const getTemp = getWeekTemp(arrayForecastHours);
 
   const getJsxDay = arrayForecastHours
-    .filter((item, i) => (1 <= i && i <= 8))
-    .map((item, i) => (
+    ?.filter((item, i) => (1 <= i && i <= 8))
+    ?.map((item, i) => (
       <Grid container
         sx={{
           display: 'flex',
@@ -77,7 +77,7 @@ export function useWeather(data, forecast) {
     ));
 
 
-  const getJsxWeek = getIcon.map((item, i) => (
+  const getJsxWeek = getIcon?.map((item, i) => (
     <Box key={i} >
       <Box sx={{
         display: 'flex',
@@ -146,14 +146,14 @@ export function useWeather(data, forecast) {
 
   const getCurrent = {
     "city": {
-      "name": city.name,
-      "country": city.country,
-      "population": city.population,
-      "sunrise": new Date(city.sunrise * 1000).toLocaleDateString('ru', {
+      "name": city?.name,
+      "country": city?.country,
+      "population": city?.population,
+      "sunrise": new Date(city?.sunrise * 1000).toLocaleDateString('ru', {
         hour: 'numeric',
         minute: 'numeric',
       }).slice(12),
-      "sunset": new Date(city.sunset * 1000).toLocaleDateString('ru', {
+      "sunset": new Date(city?.sunset * 1000).toLocaleDateString('ru', {
         hour: 'numeric',
         minute: 'numeric',
       }).slice(12),
@@ -162,24 +162,24 @@ export function useWeather(data, forecast) {
 
     },
     'base': {
-      "temp": Math.round(currentForecast.main.temp ?? null),
-      "description": symbolToUpperCase(currentForecast.weather[0].description),
-      "iconId": currentForecast.weather[0]?.icon
+      "temp": Math.round(currentForecast?.main.temp ?? null),
+      "description": symbolToUpperCase(currentForecast?.weather[0].description),
+      "iconId": currentForecast?.weather[0]?.icon
 
     },
     "wind": {
       "direction": getDerectionWind(data),
-      "speed": Math.round(currentForecast.wind?.speed ?? null),
-      "deg": currentForecast.wind?.deg,
+      "speed": Math.round(currentForecast?.wind?.speed ?? null),
+      "deg": currentForecast?.wind?.deg,
     },
     "main": {
-      "clouds": currentForecast.clouds.all,
-      "pressure": Math.round(currentForecast.main.pressure * 0.750062 ?? null),
-      "visibility": Math.round(currentForecast.visibility / 1000),
-      "tempFeels": Math.round(currentForecast.main.feels_like ?? null),
-      "pop": Math.round(currentForecast.pop * 100),
+      "clouds": currentForecast?.clouds.all,
+      "pressure": Math.round(currentForecast?.main.pressure * 0.750062 ?? null),
+      "visibility": Math.round(currentForecast?.visibility / 1000),
+      "tempFeels": Math.round(currentForecast?.main.feels_like ?? null),
+      "pop": Math.round(currentForecast?.pop * 100),
       "count": (currentForecast?.rain?.['3h'] || currentForecast?.snow?.['3h']) ?? 0,
-      "humidity": currentForecast.main.humidity,
+      "humidity": currentForecast?.main.humidity,
     },
   };
 

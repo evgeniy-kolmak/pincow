@@ -37,7 +37,7 @@ const storage = {
   },
   getWeekIcon: data => {
     let index = -1;
-    const iconArray = data.reduce((acc, item, i) => {
+    const iconArray = data?.reduce((acc, item, i) => {
       if (i % 8 === 0) {
         acc.push([])
         index++;
@@ -46,16 +46,16 @@ const storage = {
       return acc
     }, [])
 
-    const duplicateCount = iconArray.map(item => {
-      return item.reduce((acc, el) => {
+    const duplicateCount = iconArray?.map(item => {
+      return item?.reduce((acc, el) => {
         acc[el] = (acc[el] || 0) + 1;
         return acc;
       }, {})
     })
 
-    const weekIcon = duplicateCount.map(item => {
+    const weekIcon = duplicateCount?.map(item => {
       let count = 0;
-      return Object.entries(item).reduce((acc, [key, value]) => {
+      return Object.entries(item)?.reduce((acc, [key, value]) => {
         if (value > count) {
           count += value;
           acc = key;
@@ -70,7 +70,7 @@ const storage = {
   getWeekTemp: data => {
     let index = -1;
     return data
-      .reduce((acc, item, i) => {
+      ?.reduce((acc, item, i) => {
         if (i % 8 === 0) {
           acc.push([])
           index++;
@@ -78,7 +78,7 @@ const storage = {
         acc[index].push(Math.floor(item.main.temp))
         return acc
       }, [])
-      .map(item => {
+      ?.map(item => {
         const sortArray = item.sort((a, b) => b - a);
         return {
           maxTemp: sortArray[0],
@@ -88,7 +88,7 @@ const storage = {
 
   },
   symbolToUpperCase: word => {
-    return word[0].toUpperCase() + word.slice(1);
+    if (word) return word[0].toUpperCase() + word.slice(1);
   },
   getListdaysWeek: date => {
     const daysWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
