@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate, Navigate } from 'react-router-dom';
 import { Card, Box, Button, SpeedDialAction, SpeedDial } from '@mui/material';
 import { Segment, ZoomInMap, Filter1, Filter5 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
@@ -19,77 +19,83 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
 }));
 
 
-export default function Done() {
+export default function Done({ response }) {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
-      <Card
-        sx={{
-          maxWidth: "100%",
-          p: {
-            md: 5,
-            sm: 3,
-            xs: 1.5
-          }
+    <>
+      {response === 200
+        ?
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+          <Card
+            sx={{
+              maxWidth: "100%",
+              p: {
+                md: 5,
+                sm: 3,
+                xs: 1.5
+              }
 
-        }}
-      >
-        <Outlet />
+            }}
+          >
+            <Outlet />
 
-      </Card>
+          </Card>
 
-      <Box sx={{
-        position: 'relative',
-        height: 90,
-        top: 16,
-        left: {
-          md: 8,
-          sm: 20,
-          xs: 27
-        },
+          <Box sx={{
+            position: 'relative',
+            height: 90,
+            top: 16,
+            left: {
+              md: 8,
+              sm: 20,
+              xs: 27
+            },
 
-      }}>
-        <StyledSpeedDial
-          direction='left'
-          ariaLabel="Navigation cards"
-          icon={<Segment />}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              sx={{
-                width: {
-                  md: 45,
-                  sx: 35,
-                },
-                height: {
-                  md: 45,
-                  sx: 35,
-                }
+          }}>
+            <StyledSpeedDial
+              direction='left'
+              ariaLabel="Navigation cards"
+              icon={<Segment />}
+            >
+              {actions.map((action) => (
+                <SpeedDialAction
+                  sx={{
+                    width: {
+                      md: 45,
+                      sx: 35,
+                    },
+                    height: {
+                      md: 45,
+                      sx: 35,
+                    }
+                  }}
+                  key={action.name}
+                  icon={action.icon}
+                  tooltipTitle={action.name}
+                  onClick={() => navigate(`/done/${action.path}`)}
+                />
+              ))}
+            </StyledSpeedDial>
+          </Box>
+          <Button
+            variant="contained"
+            sx={{ width: 'max-content' }}
+            type='submit'>
+            <Link
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
               }}
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={() => navigate(`/done/${action.path}`)}
-            />
-          ))}
-        </StyledSpeedDial>
-      </Box>
-      <Button
-        variant="contained"
-        sx={{ width: 'max-content' }}
-        type='submit'>
-        <Link
-          style={{
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-          to='/forecast'>Выбрать город</Link>
-      </Button>
-    </Box >
-
+              to='/forecast'>Выбрать город</Link>
+          </Button>
+        </Box >
+        :
+        <Navigate to='/forecast' replace={true} />
+      }
+    </>
   );
 }

@@ -21,13 +21,18 @@ export default function App() {
     setCity(data);
   }
 
+  const [response, setResponse] = useState();
+  const handleResponse = data => {
+    setResponse(data);
+  }
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Singlepage data={weather} />}>
         <Route index element={<Main />} />
         <Route path='about' element={<About />} />
-        <Route path='forecast' element={<Forecast handleData={handleData} handleCity={handleCity} />} />
-        <Route path='done' element={<Done />}>
+        <Route path='forecast' element={<Forecast handleData={handleData} handleCity={handleCity} handleResponse={handleResponse} />} />
+        <Route path='done' element={<Done response={response} />}>
           <Route path='current' element={<Current data={weather} />} />
           <Route path='day' element={<Day data={weather} />} />
           <Route path='week' element={<Week data={weather} />} />

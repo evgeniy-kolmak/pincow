@@ -12,15 +12,15 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 export default function Forecast(props) {
+
   const token = process.env.REACT_APP_TOKEN;
-  const { handleData, handleCity } = props;
-  const [success, setSuccess] = useState(null);
+  const { handleData, handleCity, handleResponse } = props;
+  const [response, setResponse] = useState(null);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [coords, setCoords] = useState(null);
   const [clickMap, setClickMap] = useState(false);
   const [city, setCity] = useState(false);
   const matches = useMediaQuery('@media (max-width:600px)');
-
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -48,9 +48,10 @@ export default function Forecast(props) {
     try {
       const response = await axios(url);
       handleData(response.data);
-      setSuccess('success')
+      setResponse(response.status);
+      handleResponse(response.status);
     } catch (error) {
-      setSuccess('fail');
+      setResponse(error)
     }
   }
 
@@ -248,15 +249,16 @@ export default function Forecast(props) {
         </Box>
       </form>
       {
-        success === "success" && (
+        response === 200 && (
           <Navigate to="/done/current" replace={true} />
         )
       }
       {
-        success === 'fail' && (
+        response instanceof Error && (
           <Navigate to="/error" replace={true} />
         )
       }
+
     </Box >
   );
 }
