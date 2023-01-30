@@ -5,9 +5,9 @@ import { styled } from '@mui/material/styles';
 
 
 const actions = [
-  { icon: <Filter5 sx={{ fontSize: { md: 22, xs: 17 } }} />, name: 'На 5 дней', path: 'week' },
-  { icon: <Filter1 sx={{ fontSize: { md: 22, xs: 17 } }} />, name: 'На сутки', path: 'day' },
-  { icon: <ZoomInMap sx={{ fontSize: { md: 22, xs: 17 } }} />, name: 'Сейчас', path: 'current' },
+  { icon: <Filter5 />, name: 'На 5 дней', path: 'week' },
+  { icon: <Filter1 />, name: 'На сутки', path: 'day' },
+  { icon: <ZoomInMap />, name: 'Сейчас', path: 'current' },
 ];
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
@@ -63,16 +63,6 @@ export default function Done({ response }) {
             >
               {actions.map((action) => (
                 <SpeedDialAction
-                  sx={{
-                    width: {
-                      md: 45,
-                      sx: 35,
-                    },
-                    height: {
-                      md: 45,
-                      sx: 35,
-                    }
-                  }}
                   key={action.name}
                   icon={action.icon}
                   tooltipTitle={action.name}
