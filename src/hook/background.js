@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 export function useBackground(data, currentIconId) {
-  const iconId = data?.list[0].weather[0].icon;
+  const iconId = !(data, currentIconId) ? 'default' : data?.list[0].weather[0].icon;
+
 
   const colors = {
     '01d': 'linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)',
@@ -22,6 +23,7 @@ export function useBackground(data, currentIconId) {
     '13n': 'linear-gradient(to right, #6190e8, #a7bfe8)',
     '50d': 'linear-gradient(to left, #606c88, #3f4c6b)',
     '50n': 'linear-gradient(to left, #485563, #29323c)',
+    'default': 'linear-gradient(to right, #232526, #414345)'
   };
   const [color, setColor] = useState(colors[currentIconId]);
   useEffect(() => setColor(colors[iconId] ?? colors[currentIconId]), [iconId, currentIconId]); // eslint-disable-line
