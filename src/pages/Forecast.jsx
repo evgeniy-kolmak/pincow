@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText, Skeleton } from '@mui/material';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Click from '../components/Click';
-import Loader from '../components/Loader';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { WrongLocation, Announcement, LowPriority } from '@mui/icons-material';
+import { Announcement, LowPriority } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
@@ -165,35 +164,18 @@ export default function Forecast(props) {
 
         </MapContainer ></Box> : <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             height: matches ? '280px' : '380px',
             width: '100%',
-            background: 'linear-gradient(to right, #2b5876, #4e4376)',
-            backgroundSize: '400%, 400%',
-            animation: 'gradient 40s linear 0s infinite normal forwards',
-            flexDirection: 'column',
           }}>
-        <Loader />
-        <Typography
-          variant="h6"
+        <Skeleton
+          animation='wave'
+          variant="rectangular"
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            color: '#fff',
-            mt: 2,
-          }}>
-          <WrongLocation
-            sx={{
-              mr: 0.8,
-              fontSize: {
-                md: 26,
-                sm: 23,
-                xs: 20
-              }
-            }} /> Поиск геопозиции</Typography>
-        <Typography align='center' sx={{ color: '#fff', mt: 0.65, pr: 1, pl: 1, fontSize: matches ? 13 : 15 }}>Разрешите доступ к геоданным и перезагрузите страницу</Typography>
+            bgcolor: 'rgba(0, 0, 0, 0.4)',
+            width: '100%',
+            height: '100%'
+          }}
+        />
       </Box>}
       <Grid container
         sx={{ display: 'flex', alignItems: 'center', ml: 2, mt: 0.6, }}
