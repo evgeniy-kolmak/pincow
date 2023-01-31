@@ -3,14 +3,7 @@ import axios from "axios";
 
 export function usePosition() {
   const token = process.env.REACT_APP_TOKEN;
-
-  const [currentPosition, setCurrentPosition] = useState(
-    {
-      'temp': 18,
-      'cityName': 'Минск',
-      'iconId': '01d'
-    }
-  );
+  const [currentPosition, setCurrentPosition] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -22,13 +15,19 @@ export function usePosition() {
           setCurrentPosition({
             'temp': Math.floor(res?.data.main.temp),
             'cityName': res?.data.name,
-            'iconId': res?.data.weather[0].icon
+            'iconId': res?.data.weather[0].icon,
+            'assent': !!true
           });
         })
-    });
+    },
+      function error() {
+        setCurrentPosition({
+          'assent': !!false
+        })
+      }
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return currentPosition;
 
