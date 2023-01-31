@@ -1,14 +1,15 @@
-import { AppBar, Toolbar, IconButton, Typography, Box, Icon, Tooltip } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Typography, Box, Icon, Tooltip, Skeleton } from '@mui/material';
 import { usePosition } from '../hook/positionWeather';
 import { Menu, FiberPin, NearMe, CalendarMonth } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Header({ handleMenu }) {
-  const { temp, cityName, iconId } = usePosition();
+  const position = usePosition();
   const matchesMD = useMediaQuery('@media (max-width:900px)');
   const matchesSM = useMediaQuery('@media (max-width:600px)');
-  const matchesS = useMediaQuery('@media (max-width:450px)');
+  const matchesSX = useMediaQuery('@media (max-width:450px)');
+
   return (
     <AppBar position='static'>
       <Toolbar >
@@ -65,35 +66,86 @@ export default function Header({ handleMenu }) {
               })} </Typography>
             </>
             }</Box>
-          <Typography
-            variant="h6"
-            component="span"
-            sx={{
-              ml: {
-                md: 4,
-                sm: 3,
-                xs: 2
-              },
-              display: 'flex',
-              alignItems: 'center'
-            }}>
-            {matchesS ? null : <NearMe sx={{ mr: 0.8 }} />}
-            {cityName} {temp} &deg;
-            <Icon sx={{
-              fontSize: {
-                md: 40,
-                sm: 35,
-                xs: 30
-              },
-              ml: {
-                md: 0.6,
-                sm: 0.5,
-                xs: 0.4
-              }
-            }}>
-              <img src={`images/icons/${iconId}.svg`} alt='' />
-            </Icon>
-          </Typography>
+          {position.assent
+            ?
+            <Typography
+              variant="h6"
+              component="span"
+              sx={{
+                ml: {
+                  md: 4,
+                  sm: 3,
+                  xs: 2
+                },
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+              {matchesSX ? null : <NearMe sx={{ mr: 0.8 }} />}
+              {position?.cityName} {position?.temp} &deg;
+              <Icon sx={{
+                fontSize: {
+                  md: 40,
+                  sm: 35,
+                  xs: 30
+                },
+                ml: {
+                  md: 0.6,
+                  sm: 0.5,
+                  xs: 0.4
+                }
+              }}>
+                <img src={`images/icons/${position?.iconId}.svg`} alt='' />
+              </Icon>
+            </Typography>
+            :
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                ml: {
+                  md: 4,
+                  sm: 3,
+                  xs: 2
+                },
+              }}
+            >
+              <Skeleton sx={{
+                bgcolor: 'rgba(0, 0, 0, 0.17)',
+                width: {
+                  md: 113,
+                  sm: 104.5,
+                  xs: 95
+                },
+                height:
+                {
+                  md: 40,
+                  sm: 35,
+                  xs: 30
+                }
+              }}
+                animation="wave"
+                variant="text" />
+              <Skeleton sx={{
+                bgcolor: 'rgba(0, 0, 0, 0.17)',
+                width: {
+                  md: 40,
+                  sm: 35,
+                  xs: 30
+                },
+                height: {
+                  md: 40,
+                  sm: 35,
+                  xs: 30
+                },
+                ml: {
+                  md: 0.6,
+                  sm: 0.5,
+                  xs: 0.4
+                }
+              }}
+                animation="wave"
+                variant="circular" />
+            </Box>}
         </Box>
         <Tooltip title="Oткрыть меню">
           <IconButton onClick={handleMenu}>
