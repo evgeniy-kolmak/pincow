@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Container } from '@mui/material';
+import { Container, Snackbar, Alert } from '@mui/material';
 import { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -7,11 +7,10 @@ import { usePosition } from '../hook/positionWeather';
 import { useBackground } from '../hook/background';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-
 export default function SinglePage({ data }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { iconId } = usePosition();
-  const color = useBackground(data, iconId);
+  const position = usePosition();
+  const color = useBackground(data, position?.iconId);
   const matches = useMediaQuery('@media (max-width:600px)');
 
   return (
@@ -37,6 +36,17 @@ export default function SinglePage({ data }) {
         }}
       >
         <Outlet />
+
+        <Snackbar
+          open={!position.assent && position.assent !== undefined}
+          // autoHideDuration={6000}
+
+          action={!position.assent && position.assent !== undefined}
+        >
+          <Alert severity="warning" sx={{ width: '100%' }}>
+            Геолокация отключена!
+          </Alert>
+        </Snackbar >
       </Container>
       <Sidebar
         menuOpen={isMenuOpen}
