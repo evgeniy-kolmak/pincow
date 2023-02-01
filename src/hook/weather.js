@@ -23,17 +23,18 @@ export function useWeather(data, forecast) {
           width: 'max-content'
 
         }}
-        key={i}>
-        <Divider
-          orientation="vertical"
-          variant="middle"
-          flexItem />
+        key={i}
+      >
         <Grid item
           sx={{
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            p: 4
+            p: '1rem 2rem',
+            border: '0.12rem solid #ccc',
+            borderRadius: '12px',
+            m: '1rem 0.43rem'
+
           }} >
           <Typography
             sx={{
@@ -69,10 +70,7 @@ export function useWeather(data, forecast) {
             {Math.round(item.main.temp)}&deg;
           </Typography>
         </Grid>
-        <Divider
-          orientation="vertical"
-          variant="middle"
-          flexItem />
+
       </Grid>
     ));
 
