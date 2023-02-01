@@ -16,13 +16,13 @@ export function usePosition() {
             'temp': Math.floor(res?.data.main.temp),
             'cityName': res?.data.name,
             'iconId': res?.data.weather[0].icon,
-            'assent': !!true
+            'assent': true
           });
         })
     },
       function error() {
         setCurrentPosition({
-          'assent': !!false
+          'assent': false
         })
       }
     )
