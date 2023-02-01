@@ -1,3 +1,4 @@
+
 import { Outlet } from 'react-router-dom';
 import { Container, Snackbar, Alert } from '@mui/material';
 import { useState } from 'react';
@@ -39,11 +40,16 @@ export default function SinglePage({ data }) {
 
         <Snackbar
           open={!position.assent && position.assent !== undefined}
-          // autoHideDuration={6000}
-
-          action={!position.assent && position.assent !== undefined}
+          anchorOrigin={matches ? { vertical: 'bottom', horizontal: "center" } : { vertical: 'bottom', horizontal: "left" }}
         >
-          <Alert severity="warning" sx={{ width: '100%' }}>
+          <Alert
+            severity="error"
+            sx={{
+              width: {
+                md: '100%',
+                sx: '85'
+              }
+            }}>
             Геолокация отключена!
           </Alert>
         </Snackbar >
