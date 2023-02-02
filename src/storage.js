@@ -122,6 +122,22 @@ const storage = {
     } else {
       return 'Доброй ночи';
     }
+  },
+  getRandomCapitalCoords: () => {
+    const randomNumber = Math.floor(Math.random() * 10);
+    const randomCoordsCapital = [
+      [55.7522200, 37.6155600],
+      [39.9075000, 116.3972300],
+      [51.5085300, -0.1257400],
+      [50.4546600, 30.5238000],
+      [39.9198700, 32.8542700],
+      [25.0657000, 55.1712800],
+      [13.7539800, 100.5014400],
+      [38.8951100, -77.0363700],
+      [32.0808800, 34.7805700],
+      [53.9000000, 27.5666700]
+    ];
+    return randomCoordsCapital[randomNumber];
   }
 
 };
@@ -134,3 +150,4 @@ export const getListdaysWeek = storage.getListdaysWeek;
 export const getTimezone = storage.getTimezone;
 export const getTimeInCity = storage.getTimeInCity;
 export const getTimeOfDay = storage.getTimeOfDay;
+export const getRandomCapitalCoords = storage.getRandomCapitalCoords;
