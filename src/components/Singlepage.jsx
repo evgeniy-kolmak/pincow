@@ -47,7 +47,7 @@ export default function SinglePage({ data }) {
             sx={{
               width: {
                 md: '100%',
-                sx: '85'
+                sx: '85%'
               }
             }}>
             Геолокация отключена!
