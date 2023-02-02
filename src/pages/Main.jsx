@@ -69,8 +69,24 @@ export default function Main() {
               По желанию,  вы можете запретить его использование.</Typography>}
           />
         </ListItem>
-        <Map />
-        <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', mt: 0.6, fontSize: 14 }}> <DoNotTouch sx={{ mr: 0.4 }} fontSize="small" color='error' />Примечание: Мы не отслеживаем и не храним данные.</Typography>
+        <Map zoom={13} scrollWheelZoom={false} />
+        <Typography
+          color="error"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            pl: '3%',
+            mt: 0.6,
+            fontSize: 14
+          }}>
+          <DoNotTouch
+            sx={{
+              mr: 0.4
+            }}
+            fontSize="small"
+            color='error' />
+          Примечание: Мы не отслеживаем и не храним данные.
+        </Typography>
         <ListItem>
           <Grid container
             sx={{ display: 'flex', alignItems: 'center' }}

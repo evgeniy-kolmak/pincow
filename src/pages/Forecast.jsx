@@ -1,47 +1,18 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText, Skeleton } from '@mui/material';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import Click from '../components/Click';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { Announcement, LowPriority } from '@mui/icons-material';
+import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText } from '@mui/material';
+import Map from "../components/Map";
+import { Announcement, LowPriority, LocationOff } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-
 export default function Forecast(props) {
-
   const token = process.env.REACT_APP_TOKEN;
   const { handleData, handleCity, handleResponse } = props;
+  const [clickMap, setClickMap] = useState(null);
   const [response, setResponse] = useState(null);
-  const [isPageLoading, setIsPageLoading] = useState(true);
-  const [coords, setCoords] = useState(null);
-  const [clickMap, setClickMap] = useState(false);
   const [city, setCity] = useState(false);
   const matches = useMediaQuery('@media (max-width:600px)');
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      setCoords([lat, lon]);
-      coords ? setIsPageLoading(true) : setIsPageLoading(false);
-
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-
-  const markerIcon = new L.Icon({
-    iconUrl: '/images/location.svg',
-    iconSize: [matches ? 40 : 50, matches ? 55 : 65],
-    popupAnchor: [0, -25]
-  });
-
-  const handleClickMap = data => {
-    setClickMap(data)
-  }
 
   const getData = async (url) => {
     try {
@@ -56,6 +27,10 @@ export default function Forecast(props) {
 
   const handleInput = (e) => {
     setCity(e.target.value);
+  }
+
+  const handleClickMap = data => {
+    setClickMap(data);
   }
 
   function handleSubmit(e) {
@@ -73,6 +48,7 @@ export default function Forecast(props) {
     );
 
   }
+
 
   return (
     <Box
@@ -137,56 +113,47 @@ export default function Forecast(props) {
             </Grid>
           </Grid>
         </ListItem>
-      </List>
-      {!isPageLoading ? <Box sx={{
-        bgcolor: '#fff',
-        height: '100%',
-        width: '100%',
-        padding: '0px 3%'
-      }}>
-        <MapContainer
-          style={{
-            width: '100%',
-            height: matches ? '280px' : '380px'
-          }}
-          center={coords}
-          zoom={17} >
-          <Click handleClickMap={handleClickMap} />
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={coords} icon={markerIcon}>
-            <Popup>
-              Вы здесь!
-            </Popup>
-          </Marker>
-
-        </MapContainer ></Box> : <Box
+        <Typography
+          color="error"
           sx={{
-            height: matches ? '280px' : '380px',
-            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            pl: '3%',
+            mb: 0.4,
+            fontSize: 14
           }}>
-        <Skeleton
-          animation='wave'
-          variant="rectangular"
-          sx={{
-            bgcolor: 'rgba(0, 0, 0, 0.4)',
-            width: '100%',
-            height: '100%'
-          }}
-        />
-      </Box>}
-      <Grid container
-        sx={{ display: 'flex', alignItems: 'center', ml: 2, mt: 0.6, }}
-      >
-        <Grid item md={0.1} sm={0.5} xs={0.8}>
-          <LowPriority sx={{ mr: 0.1, verticalAlign: 'middle' }} fontSize="small" color='error' />
-        </Grid>
-        <Grid item md={10} sm={10} xs={10}>
-          <Typography color="error" sx={{ display: 'flex', alignItems: 'center', pl: '3%', fontSize: 14 }}>Карта имеет больший приоритет, но меньшую точность. </Typography>
-        </Grid>
-      </Grid>
+          <LocationOff
+            sx={{
+              mr: 0.4
+            }}
+            fontSize="small"
+            color='error' />
+          При отключении геолокации - карта не&nbsp;доступна.
+        </Typography>
+        <Map
+          zoom={17}
+          scrollWheelZoom={true}
+          handleClickMap={handleClickMap} />
+        <ListItem>
+          <Typography
+            color="error"
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              pl: '2%',
+              mt: 0.1,
+              fontSize: 14
+            }}>
+            <LowPriority
+              sx={{
+                mr: 0.4
+              }}
+              fontSize="small"
+              color='error' />
+            Карта имеет больший приоритет, но меньшую точность.
+          </Typography>
+        </ListItem>
+      </List>
       <Typography
         sx={{
           textAlign: 'center',
@@ -196,7 +163,9 @@ export default function Forecast(props) {
             xs: 22
           }
         }}
-        component='p'>или</Typography>
+        component='p'>
+        или
+      </Typography>
       <form onSubmit={handleSubmit}>
         <Box
           sx={{
