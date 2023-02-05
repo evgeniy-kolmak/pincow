@@ -1,4 +1,3 @@
-
 import { Outlet } from 'react-router-dom';
 import { Container, Snackbar, Alert } from '@mui/material';
 import { useState } from 'react';
@@ -29,10 +28,11 @@ export default function SinglePage({ data }) {
         sx={{
           backgroundColor: '#1E1E1E',
           minHeight: `calc(100vh - ${matches ? 56 : 64}px)`,
-          padding: {
-            md: 5,
-            sm: 4,
-            sx: 3
+          pt: 3,
+          pb: {
+            md: '3%',
+            sm: '4%',
+            xs: '10%'
           }
         }}
       >

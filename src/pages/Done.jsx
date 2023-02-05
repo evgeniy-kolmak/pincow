@@ -2,7 +2,7 @@ import { Link, Outlet, useNavigate, Navigate } from 'react-router-dom';
 import { Card, Box, Button, SpeedDialAction, SpeedDial } from '@mui/material';
 import { Segment, ZoomInMap, Filter1, Filter5 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const actions = [
   { icon: <Filter5 />, name: 'На 5 дней', path: 'week' },
@@ -21,14 +21,21 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
 
 export default function Done({ response }) {
   const navigate = useNavigate();
+  const matches = useMediaQuery('@media (max-width:600px)');
 
   return (
-    <>
+    <Box>
       {response === 200
         ?
         <Box sx={{
           display: 'flex',
           flexDirection: 'column',
+          minHeight: `calc(100vh - ${matches ? 56 : 64}px)`,
+          pb: {
+            md: '3%',
+            sm: '4%',
+            xs: '7%'
+          }
         }}>
           <Card
             sx={{
@@ -86,6 +93,6 @@ export default function Done({ response }) {
         :
         <Navigate to='/forecast' replace={true} />
       }
-    </>
+    </Box>
   );
 }
