@@ -91,7 +91,8 @@ export default function Current({ data }) {
               sx={{
                 border: '0.14rem solid #ccc',
                 borderRadius: '18px',
-                maxzaWidth: 'max-content'
+                maxWidth: 'max-content',
+                p: 0.1
               }}>
               <ListItem
                 sx={{
