@@ -35,7 +35,8 @@ export default function Done({ response }) {
             md: '3%',
             sm: '4%',
             xs: '7%'
-          }
+          },
+          overflowX: 'hidden',
         }}>
           <Card
             sx={{
