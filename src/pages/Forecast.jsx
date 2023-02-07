@@ -119,7 +119,7 @@ export default function Forecast(props) {
             display: 'flex',
             alignItems: 'center',
             pl: '3%',
-            mb: 0.4,
+            mb: 0.6,
             fontSize: 14
           }}>
           <LocationOff
@@ -146,7 +146,7 @@ export default function Forecast(props) {
             }}>
             <LowPriority
               sx={{
-                mr: 0.4
+                mr: 0.6
               }}
               fontSize="small"
               color='error' />
