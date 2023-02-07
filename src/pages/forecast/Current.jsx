@@ -103,7 +103,7 @@ export default function Current({ data }) {
                   fontSize: {
                     md: 90,
                     sm: 75,
-                    xs: 60,
+                    xs: 55,
                   },
                   mr: 1
                 }}>
@@ -147,7 +147,7 @@ export default function Current({ data }) {
                           fontSize: {
                             md: 16,
                             sm: 15,
-                            xs: 14
+                            xs: 13.4
                           }
                         }}>
                         (Ощущается как: {main.tempFeels}&deg;)
