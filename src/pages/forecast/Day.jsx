@@ -23,15 +23,7 @@ export default function Day({ data }) {
               </Typography>
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-evenly',
-              mt: 2,
-              flexWrap: 'wrap'
-            }}
-          >
+          <Box>
             {forecastDay}
           </Box>
         </Box>}

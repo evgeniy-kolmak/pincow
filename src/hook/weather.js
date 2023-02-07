@@ -1,5 +1,5 @@
 import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp, getTimezone, getTimeInCity } from '../storage';
-import { Commit } from '@mui/icons-material';
+import { Commit, LightMode, Nightlight } from '@mui/icons-material';
 import { Icon, Typography, Box, Divider, Grid } from '@mui/material';
 import { useDate } from "./date";
 
@@ -13,65 +13,100 @@ export function useWeather(data, forecast) {
   const getIcon = getWeekIcon(arrayForecastHours);
   const getTemp = getWeekTemp(arrayForecastHours);
 
+  console.log(data);
+
   const getJsxDay = arrayForecastHours
     ?.filter((item, i) => (1 <= i && i <= 8))
     ?.map((item, i) => (
-      <Grid container
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          width: 'max-content'
-
-        }}
-        key={i}
-      >
-        <Grid item
+      <Box>
+        <Grid container
           sx={{
             display: 'flex',
             alignItems: 'center',
-            flexDirection: 'column',
-            p: '1rem 2rem',
-            border: '0.12rem solid #ccc',
-            borderRadius: '12px',
-            m: '1rem 0.43rem'
+            width: 'max-content'
 
-          }} >
-          <Typography
+          }}
+          key={i}
+        >
+          <Grid item
             sx={{
-              fontWeight: 500,
-              fontSize: {
-                md: 19,
-                sm: 18,
-                xs: 17
+              display: 'flex',
+              alignItems: 'center',
+              p: {
+                md: '1.5rem 0 0 3.5rem ',
+                sm: '1rem 0 0 2rem ',
+                xs: '0.5rem 0 0 0.8rem '
               }
             }} >
-            {item.dt_txt.slice(11, 16)}
-          </Typography>
-          <Icon
-            sx={{
+            {item.sys.pod !== 'n'
+              ?
+              <LightMode
+                sx={{
+                  fontSize: {
+                    md: 27,
+                    sm: 25,
+                    xs: 23
+                  },
+                  mr: 1
+                }}
+              />
+              :
+              <Nightlight
+                sx={{
+                  fontSize: {
+                    md: 27,
+                    sm: 25,
+                    xs: 23
+                  },
+                  mr: 1
+                }}
+              />
+            }
+            <Typography sx={{
               fontSize: {
-                md: 50,
-                sm: 45,
-                xs: 40
+                md: 25,
+                sm: 23,
+                xs: 21
               },
-              m: '0.8rem 0'
-            }}>
-            <img src={`../images/icons/${item.weather[0].icon}.svg`} alt='' />
-          </Icon>
-          <Typography
-            sx={{
-              fontWeight: 500,
-              fontSize: {
-                md: 17,
-                sm: 16,
-                xs: 15
-              }
-            }}>
-            {Math.round(item.main.temp)}&deg;
-          </Typography>
+            }}
+              variant='h5'
+              component='p'>
+              {item.dt_txt.slice(11, 16)}
+            </Typography>
+            <Icon
+              sx={{
+                fontSize: {
+                  lg: 60,
+                  md: 55,
+                  sm: 47,
+                  xs: 40
+                },
+                m: {
+                  md: '0 3rem',
+                  sm: '0 2rem',
+                  xs: '0 1rem'
+                }
+              }}>
+              <img src={`../images/icons/${item.weather[0].icon}.svg`} alt='' />
+            </Icon>
+            <Typography
+              sx={{
+                fontSize: {
+                  md: 23,
+                  sm: 21,
+                  xs: 19
+                },
+              }}>
+              {Math.round(item.main.temp)}&deg;
+            </Typography>
+          </Grid>
         </Grid>
-
-      </Grid>
+        <Divider
+          sx={{
+            mt: 0.5
+          }}
+        />
+      </Box>
     ));
 
 
