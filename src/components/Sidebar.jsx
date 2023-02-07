@@ -1,5 +1,5 @@
 import { Drawer, List, ListItem, ListItemIcon, Typography, Divider, IconButton } from "@mui/material";
-import { Close, Widgets, LabelImportant, Info, Layers } from '@mui/icons-material';
+import { Close, Widgets, LabelImportant, Info, Layers, AlternateEmail } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
@@ -50,6 +50,12 @@ export default function Sidebar(props) {
           </ListItemIcon>
           <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='forecast'><Typography variant="h6" component='span'>Прогноз</Typography>
           </Link>
+        </ListItem>
+        <ListItem >
+          <ListItemIcon>
+            <AlternateEmail />
+          </ListItemIcon>
+          <Typography variant="h6" component='span'><a style={{ color: '#2d2d2d', textDecoration: 'none' }} href="mailto:support@pincow.xyz">Написать нам</a></Typography>
         </ListItem>
       </List>
     </Drawer >
