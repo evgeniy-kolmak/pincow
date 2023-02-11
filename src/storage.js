@@ -102,7 +102,7 @@ const storage = {
     }
     return result;
   },
-  getTimezone: data => data?.city.timezone / (3.6 * 10 ** 6) * 1000,
+  getTimezone: unixTime => unixTime / (3.6 * 10 ** 6) * 1000,
 
   getTimeInCity: timezone => {
     const date = new Date();
@@ -138,6 +138,91 @@ const storage = {
       [53.9000000, 27.5666700]
     ];
     return randomCoordsCapital[randomNumber];
+  },
+  getDifferenceHours: (tz, ctz) => {
+    const hour = new Date().getHours();
+    const hourInCity = Number(getTimeInCity(tz).slice(12, 14));
+    let difference = 0;
+    if (tz >= 0) {
+      if (hourInCity < hour) {
+        if (tz > ctz) {
+          return difference += Math.abs((hour - 24) - hourInCity);
+        }
+        return difference += hour - hourInCity;
+      }
+      else if (hourInCity > hour) {
+        return difference += Math.abs(hour - hourInCity);
+      } else {
+        return difference;
+      }
+    } else {
+      return difference += hourInCity - hour
+
+    }
+  },
+  currentHourInCity: (i, tz, ctz) => {
+    const differenceTime = getDifferenceHours(tz, ctz);
+    const itemHour = +i.dt_txt.slice(11, 13) + differenceTime;
+    let result = 0;
+    if (itemHour > 23) {
+      result += itemHour - 24;
+    } else if (differenceTime < 0 && !+i.dt_txt.slice(11, 13)) {
+      result += 24 - Math.abs(itemHour);
+    } else if (differenceTime < 0 && +i.dt_txt.slice(11, 13) < Math.abs(differenceTime)) {
+      result += 24 + itemHour;
+    } else {
+      result += itemHour;
+    }
+
+    return `${result < 10 ? 0 : ''}${result}:00`
+
+  },
+  getSunTime: (city, tz, ctz) => {
+    const differenceTime = getDifferenceHours(tz, ctz);
+
+    const sunriseTime = new Date(city?.sunrise * 1000).toLocaleDateString('ru', {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+    const sunsetTime = new Date(city?.sunset * 1000).toLocaleDateString('ru', {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+
+    const sunriseHours = +sunriseTime.slice(12, 14);
+    const sunsetHours = +sunsetTime.slice(12, 14);
+
+    const getSunHour = (i, tz, ctz, dt) => {
+      const itemHour = i + dt;
+      let result = 0;
+
+      if (ctz > tz) {
+        if (dt < 0) {
+          if (i < Math.abs(dt)) {
+            result += 24 + itemHour;
+          } else {
+            result += itemHour;
+          }
+        } else {
+          result += i - dt;
+        }
+      } else {
+        if (itemHour > 23) {
+          result += itemHour - 24
+        } else {
+          result += itemHour;
+        }
+      }
+      return result
+
+    }
+    const sunriseHour = getSunHour(sunriseHours, tz, ctz, differenceTime);
+    const sunsetHour = getSunHour(sunsetHours, tz, ctz, differenceTime);
+
+    const sunrise = `${sunriseHour < 10 ? 0 : ''}${sunriseHour}${sunriseTime.slice(14, 17)}`;
+    const sunset = `${sunsetHour < 10 ? 0 : ''}${sunsetHour}${sunsetTime.slice(14, 17)}`;
+
+    return { sunrise, sunset };
   }
 
 };
@@ -151,3 +236,6 @@ export const getTimezone = storage.getTimezone;
 export const getTimeInCity = storage.getTimeInCity;
 export const getTimeOfDay = storage.getTimeOfDay;
 export const getRandomCapitalCoords = storage.getRandomCapitalCoords;
+export const getDifferenceHours = storage.getDifferenceHours;
+export const currentHourInCity = storage.currentHourInCity;
+export const getSunTime = storage.getSunTime;

@@ -1,19 +1,29 @@
-import { getDerectionWind, symbolToUpperCase, getWeekIcon, getWeekTemp, getTimezone, getTimeInCity } from '../storage';
+import {
+  getDerectionWind,
+  symbolToUpperCase,
+  getWeekIcon,
+  getWeekTemp,
+  getTimezone,
+  getTimeInCity,
+  currentHourInCity,
+  getSunTime
+} from '../storage';
 import { Commit, LightMode, Nightlight } from '@mui/icons-material';
 import { Icon, Typography, Box, Divider, Grid } from '@mui/material';
 import { useDate } from "./date";
+import { usePosition } from '../hook/positionWeather';
 
 export function useWeather(data, forecast) {
   const { dayWeek } = useDate()
+  const { currentTimezone } = usePosition();
   const city = data?.city;
   const currentForecast = data?.list[0];
   const arrayForecastHours = data?.list;
 
-  const timezone = getTimezone(data);
+  const timezone = getTimezone(city?.timezone);
   const getIcon = getWeekIcon(arrayForecastHours);
   const getTemp = getWeekTemp(arrayForecastHours);
-
-  console.log(data);
+  const { sunrise, sunset } = getSunTime(city, timezone, currentTimezone)
 
   const getJsxDay = arrayForecastHours
     ?.filter((item, i) => (1 <= i && i <= 8))
@@ -24,7 +34,6 @@ export function useWeather(data, forecast) {
             display: 'flex',
             alignItems: 'center',
             width: 'max-content'
-
           }}
           key={i}
         >
@@ -71,7 +80,7 @@ export function useWeather(data, forecast) {
             }}
               variant='h5'
               component='p'>
-              {item.dt_txt.slice(11, 16)}
+              {currentHourInCity(item, timezone, currentTimezone)}
             </Typography>
             <Icon
               sx={{
@@ -106,7 +115,7 @@ export function useWeather(data, forecast) {
             mt: 0.5
           }}
         />
-      </Box>
+      </Box >
     ));
 
 
@@ -182,14 +191,8 @@ export function useWeather(data, forecast) {
       "name": city?.name,
       "country": city?.country,
       "population": city?.population,
-      "sunrise": new Date(city?.sunrise * 1000).toLocaleDateString('ru', {
-        hour: 'numeric',
-        minute: 'numeric',
-      }).slice(12),
-      "sunset": new Date(city?.sunset * 1000).toLocaleDateString('ru', {
-        hour: 'numeric',
-        minute: 'numeric',
-      }).slice(12),
+      "sunrise": sunrise,
+      "sunset": sunset,
       "timezone": timezone.toString().split('')[0] !== '-' && timezone.toString().split('')[0] !== 0 ? `(GMT+${timezone})` : `(GMT${timezone})`,
       "time": getTimeInCity(timezone).slice(12, 17),
 
