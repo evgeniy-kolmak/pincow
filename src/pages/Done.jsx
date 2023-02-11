@@ -1,30 +1,35 @@
-import { Link, Outlet, useNavigate, Navigate } from 'react-router-dom';
-import { Card, Box, Button, SpeedDialAction, SpeedDial } from '@mui/material';
-import { Segment, ZoomInMap, Filter1, Filter5 } from '@mui/icons-material';
+import { Link, Outlet, useNavigate, Navigate, } from 'react-router-dom';
+import { Card, Box, Button, ToggleButtonGroup, ToggleButton, Paper } from '@mui/material';
+import { DateRange, Today, CalendarMonth } from '@mui/icons-material';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const actions = [
-  { icon: <Filter5 />, name: 'На 5 дней', path: 'week' },
-  { icon: <Filter1 />, name: 'На сутки', path: 'day' },
-  { icon: <ZoomInMap />, name: 'Сейчас', path: 'current' },
-];
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  '& .MuiToggleButtonGroup-grouped': {
+    margin: theme.spacing(0.5),
+    border: 0,
 
-const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
-  position: 'absolute',
-  '&.MuiSpeedDial-directionLeft': {
-    right: theme.spacing(4),
-  },
-
+  }
 }));
 
 
 export default function Done({ response }) {
   const navigate = useNavigate();
+  const [active, setActive] = useState('current');
+
+  const handleChange = (event, path) => {
+    if (path !== null) {
+      navigate(`/done/${path}`);
+      setActive(path);
+    }
+  };
+
   const matches = useMediaQuery('@media (max-width:600px)');
 
   return (
     <Box>
+
       {response === 200
         ?
         <Box sx={{
@@ -32,9 +37,9 @@ export default function Done({ response }) {
           flexDirection: 'column',
           minHeight: `calc(100vh - ${matches ? 56 : 64}px)`,
           pb: {
-            md: '3%',
-            sm: '4%',
-            xs: '7%'
+            md: '1%',
+            sm: '1.5%',
+            xs: '6%'
           },
           overflowX: 'hidden',
         }}>
@@ -46,50 +51,71 @@ export default function Done({ response }) {
                 sm: 3,
                 xs: 1.5
               }
-
             }}
           >
             <Outlet />
-
           </Card>
 
-          <Box sx={{
-            position: 'relative',
-            height: 90,
-            top: 16,
-            left: {
-              md: 8,
-              sm: 20,
-              xs: 27
-            },
-
-          }}>
-            <StyledSpeedDial
-              direction='left'
-              ariaLabel="Navigation cards"
-              icon={<Segment />}
-            >
-              {actions.map((action) => (
-                <SpeedDialAction
-                  key={action.name}
-                  icon={action.icon}
-                  tooltipTitle={action.name}
-                  onClick={() => navigate(`/done/${action.path}`)}
-                />
-              ))}
-            </StyledSpeedDial>
-          </Box>
-          <Button
-            variant="contained"
-            sx={{ width: 'max-content' }}
-            type='submit'>
-            <Link
-              style={{
-                color: 'inherit',
-                textDecoration: 'none',
+          <Paper
+            elevation={0}
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              m: '1rem 0',
+              border: (theme) => `1px solid ${theme.palette.divider}`,
+              flex: 'wrap'
+            }}>
+            <Button
+              variant="contained"
+              sx={{
+                width: 'max-content',
+                height: 'min-content',
+                ml: {
+                  md: 1,
+                  sm: 0.7,
+                  xs: 0.5
+                },
+                fontSize: {
+                  md: 14,
+                  sm: 13,
+                  xs: 11.35
+                }
               }}
-              to='/forecast'>Выбрать город</Link>
-          </Button>
+              type='submit'>
+              <Link
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+                to='/forecast'>Выбрать город</Link>
+            </Button>
+
+            <StyledToggleButtonGroup
+              size={matches ? 'smal' : 'medium'}
+              value={active}
+              selected={true}
+              exclusive
+              onChange={handleChange}
+              aria-label="Forecast"
+              color='info'>
+              <ToggleButton
+                aria-label='current'
+                value='current'>
+                <Today />
+              </ToggleButton>
+              <ToggleButton
+                aria-label='day'
+                value='day'>
+                <DateRange />
+              </ToggleButton>
+              <ToggleButton
+                aria-label='week'
+                value='week'>
+                <CalendarMonth />
+              </ToggleButton>
+            </StyledToggleButtonGroup>
+          </Paper>
         </Box >
         :
         <Navigate to='/forecast' replace={true} />
