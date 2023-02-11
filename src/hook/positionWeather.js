@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getRandomCapitalCoords } from '../storage'
-
+import { getRandomCapitalCoords, getTimezone } from '../storage'
 export function usePosition() {
   const token = process.env.REACT_APP_TOKEN;
   const randomCoords = getRandomCapitalCoords();
@@ -18,6 +17,7 @@ export function usePosition() {
               'temp': Math.floor(res?.data.main.temp),
               'cityName': res?.data.name,
               'iconId': res?.data.weather[0].icon,
+              'currentTimezone': getTimezone(res?.data.timezone),
               'coords': [lat, lon],
               'assent': true
             });
