@@ -28,14 +28,13 @@ export function useWeather(data, forecast) {
   const getJsxDay = arrayForecastHours
     ?.filter((item, i) => (1 <= i && i <= 8))
     ?.map((item, i) => (
-      <Box>
+      <Box key={i}>
         <Grid container
           sx={{
             display: 'flex',
             alignItems: 'center',
             width: 'max-content'
           }}
-          key={i}
         >
           <Grid item
             sx={{
