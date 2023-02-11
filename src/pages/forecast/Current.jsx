@@ -29,6 +29,9 @@ export default function Current({ data }) {
               <Typography
                 sx={{
                   mb: 0.5,
+                  fontWeight: {
+                    xs: 400
+                  }
                 }}
                 variant='h3'
                 component='h6'>
