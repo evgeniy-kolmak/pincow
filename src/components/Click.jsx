@@ -6,7 +6,9 @@ export default function Click({ handleClickMap }) {
       map.locate()
     },
     locationfound: (location) => {
-      handleClickMap(location.target['_animateToCenter']);
+      if (handleClickMap) {
+        handleClickMap(location.target['_animateToCenter'])
+      };
     }
   })
   return null;
