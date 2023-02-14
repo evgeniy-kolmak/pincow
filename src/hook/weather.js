@@ -8,6 +8,7 @@ import {
   currentHourInCity,
   getSunTime
 } from '../storage';
+
 import { Commit, LightMode, Nightlight } from '@mui/icons-material';
 import { Icon, Typography, Box, Divider, Grid } from '@mui/material';
 import { useDate } from "./date";
@@ -19,96 +20,98 @@ export function useWeather(data, forecast) {
   const city = data?.city;
   const currentForecast = data?.list[0];
   const arrayForecastHours = data?.list;
-
   const timezone = getTimezone(city?.timezone);
   const getIcon = getWeekIcon(arrayForecastHours);
   const getTemp = getWeekTemp(arrayForecastHours);
-  const { sunrise, sunset } = getSunTime(city, timezone, currentTimezone)
+
+  const { sunrise, sunset } = getSunTime(city, timezone, currentTimezone);
 
   const getJsxDay = arrayForecastHours
     ?.filter((item, i) => (1 <= i && i <= 8))
     ?.map((item, i) => (
       <Box key={i}>
-        <Grid container
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            width: 'max-content'
-          }}
-        >
-          <Grid item
+        <Box>
+          <Grid container
             sx={{
               display: 'flex',
               alignItems: 'center',
-              p: {
-                md: '1.5rem 0 0 3.5rem ',
-                sm: '1rem 0 0 2rem ',
-                xs: '0.5rem 0 0 0.8rem '
-              }
-            }} >
-            {item.sys.pod !== 'n'
-              ?
-              <LightMode
-                sx={{
-                  fontSize: {
-                    md: 27,
-                    sm: 25,
-                    xs: 23
-                  },
-                  mr: 1
-                }}
-              />
-              :
-              <Nightlight
-                sx={{
-                  fontSize: {
-                    md: 27,
-                    sm: 25,
-                    xs: 23
-                  },
-                  mr: 1
-                }}
-              />
-            }
-            <Typography sx={{
-              fontSize: {
-                md: 25,
-                sm: 23,
-                xs: 21
-              },
+              width: 'max-content'
             }}
-              variant='h5'
-              component='p'>
-              {currentHourInCity(item, timezone, currentTimezone)}
-            </Typography>
-            <Icon
+          >
+            <Grid item
               sx={{
-                fontSize: {
-                  lg: 60,
-                  md: 55,
-                  sm: 47,
-                  xs: 40
-                },
-                m: {
-                  md: '0 3rem',
-                  sm: '0 2rem',
-                  xs: '0 1rem'
+                display: 'flex',
+                alignItems: 'center',
+                p: {
+                  md: '1rem 0 0 2.4rem ',
+                  sm: '0.7rem 0 0 1.5rem ',
+                  xs: '0.5rem 0 0 0.8rem '
                 }
-              }}>
-              <img src={`../images/icons/${item.weather[0].icon}.svg`} alt='' />
-            </Icon>
-            <Typography
-              sx={{
+              }} >
+              {item.sys.pod !== 'n'
+                ?
+                <LightMode
+                  sx={{
+                    fontSize: {
+                      md: 26,
+                      sm: 24,
+                      xs: 22
+                    },
+                    mr: 1
+                  }}
+                />
+                :
+                <Nightlight
+                  sx={{
+                    fontSize: {
+                      md: 26,
+                      sm: 24,
+                      xs: 22
+                    },
+                    mr: 1
+                  }}
+                />
+              }
+              <Typography sx={{
                 fontSize: {
                   md: 23,
                   sm: 21,
                   xs: 19
                 },
-              }}>
-              {Math.round(item.main.temp)}&deg;
-            </Typography>
+              }}
+                variant='h5'
+                component='p'>
+                {currentHourInCity(item, timezone, currentTimezone)}
+              </Typography>
+              <Icon
+                sx={{
+                  fontSize: {
+                    lg: 52,
+                    md: 47,
+                    sm: 40,
+                    xs: 35
+                  },
+                  m: {
+                    md: '0 3rem',
+                    sm: '0 2rem',
+                    xs: '0 1rem'
+                  }
+                }}>
+                <img src={`../images/icons/${item.weather[0].icon}.svg`} alt='' />
+              </Icon>
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: 25,
+                    sm: 23,
+                    xs: 21
+                  },
+                }}>
+                {Math.round(item.main.temp)}&deg;
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
         <Divider
           sx={{
             mt: 0.5
@@ -157,7 +160,8 @@ export function useWeather(data, forecast) {
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+
           }}>
           <Typography
             variant='h5'
@@ -193,7 +197,7 @@ export function useWeather(data, forecast) {
       "sunrise": sunrise,
       "sunset": sunset,
       "timezone": timezone.toString().split('')[0] !== '-' && timezone.toString().split('')[0] !== 0 ? `(GMT+${timezone})` : `(GMT${timezone})`,
-      "time": getTimeInCity(timezone).slice(12, 17),
+      "time": getTimeInCity(timezone).slice(12, 17)
 
     },
     'base': {
