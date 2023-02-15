@@ -25,17 +25,20 @@ export default function Error({ city }) {
               <LinkRouter
                 underline="hover"
                 color="inherit"
-                to="/"
-                sx={{
-                  fontSize: {
-                    md: 16,
-                    sm: 15,
-                    xs: 14
-                  }
-                }}
-              >
-                <Home sx={{ mr: 0.5 }} fontSize="inherit" />
-                Главная
+                to="/">
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontSize: {
+                      md: 16,
+                      sm: 15,
+                      xs: 14
+                    }
+                  }}>
+                  <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+                  Главная
+                </Typography>
               </LinkRouter>
               <Typography
                 sx={{

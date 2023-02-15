@@ -21,37 +21,42 @@ export default function Week({ data }) {
             aria-label="breadcrumb"
             sx={{
               mb: 2
-            }}
-          >
+            }}>
             <LinkRouter
               underline="hover"
               color="inherit"
-              to="/"
-              sx={{
-                fontSize: {
-                  md: 16,
-                  sm: 15,
-                  xs: 14
-                }
-              }}
-            >
-              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
-              Главная
+              to="/">
+              <Typography
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: {
+                    md: 16,
+                    sm: 15,
+                    xs: 14
+                  }
+                }}>
+                <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+                Главная
+              </Typography>
             </LinkRouter>
             <LinkRouter
               underline="hover"
               color="inherit"
-              to="/forecast"
-              sx={{
-                fontSize: {
-                  md: 16,
-                  sm: 15,
-                  xs: 14
-                }
-              }}
-            >
-              <Cloud sx={{ mr: 0.5 }} fontSize="inherit" />
-              Прогноз погоды
+              to="/forecast">
+              <Typography
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: {
+                    md: 16,
+                    sm: 15,
+                    xs: 14
+                  }
+                }}>
+                <Cloud sx={{ mr: 0.5 }} fontSize="inherit" />
+                Прогноз погоды
+              </Typography>
             </LinkRouter>
             <Typography
               sx={{
