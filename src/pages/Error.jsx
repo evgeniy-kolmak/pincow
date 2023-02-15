@@ -1,6 +1,6 @@
-import { Link, Navigate } from 'react-router-dom';
-import { Card, Box, Button, Typography } from '@mui/material';
-import { FormatQuote, Clear } from '@mui/icons-material';
+import { Link as LinkRouter, Navigate } from 'react-router-dom';
+import { Card, Box, Button, Typography, Breadcrumbs } from '@mui/material';
+import { FormatQuote, Clear, Home, Error as ErrorMui } from '@mui/icons-material';
 
 export default function Error({ city }) {
 
@@ -14,9 +14,45 @@ export default function Error({ city }) {
           <Card
             sx={{
               maxWidth: "100%",
-              padding: "30px",
+              padding: 2,
             }}
           >
+            <Breadcrumbs aria-label="breadcrumb"
+              sx={{
+                mb: 2
+              }}
+            >
+              <LinkRouter
+                underline="hover"
+                color="inherit"
+                to="/"
+                sx={{
+                  fontSize: {
+                    md: 16,
+                    sm: 15,
+                    xs: 14
+                  }
+                }}
+              >
+                <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+                Главная
+              </LinkRouter>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: {
+                    md: 16,
+                    sm: 15,
+                    xs: 14
+                  }
+                }}
+                color="text.primary"
+              >
+                <ErrorMui sx={{ mr: 0.5 }} fontSize="inherit" />
+                Ошибка
+              </Typography>
+            </Breadcrumbs>
             <Typography
               sx={{
                 display: 'flex',
@@ -95,12 +131,12 @@ export default function Error({ city }) {
               mt: 4,
             }}
             type='submit'>
-            <Link
+            <LinkRouter
               style={{
                 color: 'inherit',
                 textDecoration: 'none',
               }}
-              to='/forecast'>Попробовать снова</Link>
+              to='/forecast'>Попробовать снова</LinkRouter>
           </Button>
         </Box >}
     </>

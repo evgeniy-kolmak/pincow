@@ -1,4 +1,15 @@
-import { Box, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, Button, Grid } from '@mui/material';
+import {
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Button,
+  Grid,
+  Breadcrumbs
+} from '@mui/material';
 import {
   Person,
   Language,
@@ -10,9 +21,12 @@ import {
   Opacity,
   DateRange,
   Today,
-  CalendarMonth
+  CalendarMonth,
+  Home,
+  Info
 } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link as LinkRouter } from 'react-router-dom';
+
 
 
 export default function About() {
@@ -22,7 +36,42 @@ export default function About() {
       bgcolor: '#fff',
       borderRadius: 3
     }}>
+
       <List >
+        <ListItem>
+          <Breadcrumbs aria-label="breadcrumb">
+            <LinkRouter
+              underline="hover"
+              color="inherit"
+              to="/"
+              sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+            >
+              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+              Главная
+            </LinkRouter>
+            <Typography
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+              color="text.primary"
+            >
+              <Info sx={{ mr: 0.5 }} fontSize="inherit" />
+              О нас
+            </Typography>
+          </Breadcrumbs>
+        </ListItem>
         <ListItem>
           <Typography variant='h2' component='p'>Как это работает?</Typography>
         </ListItem>
@@ -106,39 +155,39 @@ export default function About() {
                 }
               }}>На каждой странице есть подсказки. (Так же всплывающие "При наведении")</Typography>} />
         </ListItem>
-        <ListItem>
+        <ListItem
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+          }}
+        >
+          {/* Ошибка тут */}
           <ListItemText
-            primary={<Typography variant='h6' component='p'
-              sx={{
-                mb: {
-                  md: 1.8,
-                  sm: 2.3,
-                  xs: 2.6
-                }
-              }}>При успешной отправке, вам отобразится текущий прогноз.</Typography>}
-            secondary={
-              <Grid
-                container
-                spacing={3.5}
+            primary={
+              <Typography variant='h6' component='p'
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-              >
-                <Grid item>
-                  <Typography> <People sx={{ mr: 0.5, color: '#000', verticalAlign: 'middle' }} /> Население</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography><Visibility sx={{ mr: 0.5, color: '#000', verticalAlign: 'middle' }} /> Видимость</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography><Compress sx={{ mr: 0.5, color: '#000', verticalAlign: 'middle' }} /> Давление</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography><Opacity sx={{ mr: 0.5, color: '#000', verticalAlign: 'middle' }} /> Влажность и т.д.</Typography>
-                </Grid>
-              </Grid>
-            } />
+                  mb: {
+                    md: 1.8,
+                    sm: 2.3,
+                    xs: 2.6
+                  }
+                }}>При успешной отправке, вам отобразится текущий прогноз.</Typography>} />
+
+          <Grid
+            container
+            spacing={1.5}
+
+          >
+            <Grid item>
+              <Typography sx={{ mb: 1.5 }}><People sx={{ ml: 0.2, mr: 0.5, color: '#000', verticalAlign: 'middle' }} />Население</Typography>
+              <Typography><Visibility sx={{ ml: 0.2, mr: 0.5, color: '#000', verticalAlign: 'middle' }} />Видимость</Typography>
+            </Grid>
+            <Grid item>
+              <Typography sx={{ mb: 1.5 }}><Compress sx={{ mr: 0.5, color: '#000', verticalAlign: 'middle' }} /> Давление</Typography>
+              <Typography><Opacity sx={{ mr: 0.5, color: '#000', verticalAlign: 'middle' }} /> Влажность и т.д.</Typography>
+            </Grid>
+          </Grid>
         </ListItem>
         <ListItem>
           <ListItemText
@@ -191,12 +240,13 @@ export default function About() {
           </Grid>
         </ListItem>
       </List >
-      <Button sx={{ ml: 5, mb: 5, mt: 3 }} variant="contained"><Link
-        style={{
-          color: 'inherit',
-          textDecoration: 'none',
-        }}
-        to='/forecast'>Попробовать</Link>
+      <Button sx={{ ml: 5, mb: 5, mt: 3 }} variant="contained">
+        <LinkRouter
+          style={{
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+          to='/forecast'>Попробовать</LinkRouter>
       </Button>
     </Box >
 

@@ -1,7 +1,24 @@
 import { useWeather } from "../../hook/weather";
-import { Navigate } from 'react-router-dom';
-import { Typography, Icon, List, ListItem, Tooltip, ListItemText, Box } from '@mui/material';
-import { North, Air, Compress, WbTwilight, WbSunny, People, FilterDrama, Opacity, Grain, FormatColorReset, Visibility, FiberManualRecord, AccessTime } from '@mui/icons-material';
+import { Navigate, Link as LinkRouter } from 'react-router-dom';
+import { Typography, Icon, List, ListItem, Tooltip, ListItemText, Box, Breadcrumbs } from '@mui/material';
+import {
+  North,
+  Air,
+  Compress,
+  WbTwilight,
+  WbSunny,
+  People,
+  FilterDrama,
+  Opacity,
+  Grain,
+  FormatColorReset,
+  Visibility,
+  FiberManualRecord,
+  AccessTime,
+  Home,
+  Cloud,
+  Today
+} from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
@@ -16,6 +33,59 @@ export default function Current({ data }) {
         <Navigate to="/forecast" replace={true} />
         :
         <Box>
+          <Breadcrumbs
+            maxItems={matches ? 2 : 3}
+            aria-label="breadcrumb"
+            sx={{
+              mb: 2
+            }}
+          >
+            <LinkRouter
+              underline="hover"
+              color="inherit"
+              to="/"
+              sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+            >
+              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+              Главная
+            </LinkRouter>
+            <LinkRouter
+              underline="hover"
+              color="inherit"
+              to="/forecast"
+              sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+            >
+              <Cloud sx={{ mr: 0.5 }} fontSize="inherit" />
+              Прогноз погоды
+            </LinkRouter>
+            <Typography
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+              color="text.primary"
+            >
+              <Today sx={{ mr: 0.5 }} fontSize="inherit" />
+              Текущий
+            </Typography>
+          </Breadcrumbs>
           <Typography variant='h2' >Текущий прогноз</Typography>
           <List
             sx={{
@@ -140,7 +210,6 @@ export default function Current({ data }) {
                           sm: 30,
                           xs: 26
                         }
-
                       }}>
                       {base.temp}&deg;
                       <Typography
@@ -414,7 +483,7 @@ export default function Current({ data }) {
               </Tooltip>
             </ListItem>
           </List>
-        </Box >}
+        </Box>}
     </Box>
   );
 

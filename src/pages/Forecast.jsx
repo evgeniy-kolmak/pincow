@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Navigate, Link as LinkRouter } from 'react-router-dom';
+import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText, Breadcrumbs } from '@mui/material';
 import Map from "../components/Map";
-import { Announcement, LowPriority, LocationOff } from '@mui/icons-material';
+import { Announcement, LowPriority, LocationOff, Home, Cloud } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Forecast(props) {
@@ -59,6 +59,44 @@ export default function Forecast(props) {
     >
       <List>
         <ListItem>
+          <Breadcrumbs aria-label="breadcrumb"
+            sx={{
+              mb: 2
+            }}
+          >
+            <LinkRouter
+              underline="hover"
+              color="inherit"
+              to="/"
+              sx={{
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+            >
+              <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+              Главная
+            </LinkRouter>
+            <Typography
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: {
+                  md: 16,
+                  sm: 15,
+                  xs: 14
+                }
+              }}
+              color="text.primary"
+            >
+              <Cloud sx={{ mr: 0.5 }} fontSize="inherit" />
+              Прогноз погоды
+            </Typography>
+          </Breadcrumbs>
+        </ListItem>
+        <ListItem>
           <ListItemText
             primary={
               <Typography
@@ -79,7 +117,7 @@ export default function Forecast(props) {
                     md: 24,
                     sm: 20,
                     xs: 17
-                  },
+                  }
                 }}
                 component='p'>
                 Для более точного определения - используйте "Зум".
