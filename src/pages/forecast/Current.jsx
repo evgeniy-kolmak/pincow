@@ -165,7 +165,8 @@ export default function Current({ data }) {
                 border: '0.14rem solid #ccc',
                 borderRadius: '18px',
                 maxWidth: 'max-content',
-                p: 0.1
+                p: 0.1,
+                m: '0.6rem 0'
               }}>
               <ListItem
                 sx={{
