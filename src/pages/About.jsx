@@ -73,7 +73,7 @@ export default function About() {
           </Breadcrumbs>
         </ListItem>
         <ListItem>
-          <Typography variant='h2' component='p'>Как это работает?</Typography>
+          <Typography variant='h2' component='h1'>Как это работает?</Typography>
         </ListItem>
         <ListItem>
           <Grid container spacing={4}>

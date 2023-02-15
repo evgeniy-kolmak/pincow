@@ -15,7 +15,7 @@ export default function Main() {
       <List>
         <ListItem>
           <ListItemText
-            primary={<Typography variant='h2' component='p' >{greeting}, дорогой друг!</Typography>}
+            primary={<Typography variant='h2' component='h1' >{greeting}, дорогой друг!</Typography>}
             secondary={<Typography variant='h6' component='p'>Очень рады, что вы заглянули к нам.</Typography>} />
         </ListItem>
         <ListItem>

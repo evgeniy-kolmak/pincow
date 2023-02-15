@@ -74,7 +74,7 @@ export default function Week({ data }) {
               <Typography variant='h3' component='p'><span style={{ fontWeight: 400 }}>{city}:</span></Typography>
             </Grid>
             <Grid item>
-              <Typography variant='h3' component='p'>
+              <Typography variant='h3' component="h1">
                 Прогноз на 5 дней
               </Typography>
             </Grid>

@@ -58,7 +58,9 @@ export default function Error({ city }) {
                 display: 'flex',
                 alignItems: 'center',
               }}
-              variant='h2'>
+              variant='h2'
+              component='h1'
+            >
               Упс!
               <Clear color="error"
                 sx={{

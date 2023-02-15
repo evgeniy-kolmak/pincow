@@ -107,7 +107,7 @@ export default function Forecast(props) {
                     xs: 25
                   }
                 }}
-                component='p'>
+                component="h1">
                 Воспользуйтесь картой для выбора местоположения.
               </Typography>}
             secondary={

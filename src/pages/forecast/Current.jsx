@@ -86,7 +86,7 @@ export default function Current({ data }) {
               Текущий
             </Typography>
           </Breadcrumbs>
-          <Typography variant='h2' >Текущий прогноз</Typography>
+          <Typography variant='h2' component="h1" >Текущий прогноз</Typography>
           <List
             sx={{
               p: 0
