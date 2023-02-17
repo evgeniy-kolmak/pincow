@@ -1,6 +1,7 @@
 const storage = {
   getDerectionWind: data => {
-    const deg = data?.list[0].wind?.deg;
+    const deg = data?.wind.deg;
+
     if (23 <= deg && deg <= 67) {
       return 'СВ';
     }
