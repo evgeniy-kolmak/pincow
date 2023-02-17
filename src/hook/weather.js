@@ -201,21 +201,21 @@ export function useWeather(data, forecast) {
 
     },
     'base': {
-      "temp": Math.round(currentForecast?.main.temp ?? null),
+      "temp": Math.round(currentForecast?.main.temp),
       "description": symbolToUpperCase(currentForecast?.weather[0].description),
       "iconId": currentForecast?.weather[0]?.icon
 
     },
     "wind": {
-      "direction": getDerectionWind(data),
-      "speed": Math.round(currentForecast?.wind?.speed ?? null),
+      "direction": getDerectionWind(currentForecast),
+      "speed": Math.round(currentForecast?.wind?.speed),
       "deg": currentForecast?.wind?.deg,
     },
     "main": {
       "clouds": currentForecast?.clouds.all,
-      "pressure": Math.round(currentForecast?.main.pressure * 0.750062 ?? null),
+      "pressure": Math.round(currentForecast?.main.pressure * 0.750062),
       "visibility": Math.round(currentForecast?.visibility / 1000),
-      "tempFeels": Math.round(currentForecast?.main.feels_like ?? null),
+      "tempFeels": Math.round(currentForecast?.main.feels_like),
       "pop": Math.round(currentForecast?.pop * 100),
       "count": (currentForecast?.rain?.['3h'] || currentForecast?.snow?.['3h']) ?? 0,
       "humidity": currentForecast?.main.humidity,
