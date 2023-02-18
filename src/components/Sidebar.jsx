@@ -33,19 +33,19 @@ export default function Sidebar(props) {
             mb: 2
           }}
         />
-        <ListItem >
+        <ListItem onClick={closeMenu}>
           <ListItemIcon>
             <LabelImportant />
           </ListItemIcon>
           <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='/'><Typography variant="h6" component='span'>Главная</Typography></Link>
         </ListItem>
-        <ListItem >
+        <ListItem onClick={closeMenu}>
           <ListItemIcon>
             <Info />
           </ListItemIcon>
           <Link style={{ color: '#2d2d2d', textDecoration: 'none' }} to='about'><Typography variant="h6" component='span'>О нас</Typography></Link>
         </ListItem>
-        <ListItem>
+        <ListItem onClick={closeMenu}>
           <ListItemIcon>
             <Layers />
           </ListItemIcon>
