@@ -18,7 +18,7 @@ export default function CurrentForecastModal(props) {
       xs: 420
     },
     boxShadow: 24,
-    p: matches ? ' 0.5rem 0.5rem 1rem 0.5rem' : ' 0.5rem 1.5rem 1rem 1.5rem',
+    p: matches ? ' 0.5rem 0.6rem 1rem 0.6rem' : ' 0.5rem 1.5rem 1rem 1.5rem',
     outline: 'none',
     borderRadius: 3
   };
@@ -396,7 +396,7 @@ export default function CurrentForecastModal(props) {
                     xs: 23
                   }
                 }} />
-              <Typography component='span' sx={{ fontWeight: 350 }}>Кол-во осадкво в час:</Typography>
+              <Typography component='span' sx={{ fontWeight: 350 }}>Кол-во осадков в час:</Typography>
               &nbsp;{count} мм
             </Typography>
           </ListItem>
