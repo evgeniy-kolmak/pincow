@@ -11,10 +11,10 @@ import {
 
 import { Commit, LightMode, Nightlight } from '@mui/icons-material';
 import { Icon, Typography, Box, Divider, Grid } from '@mui/material';
-import { useDate } from "./date";
+import { useDate } from "../hook/date";
 import { usePosition } from '../hook/positionWeather';
 
-export function useWeather(data, forecast) {
+export function Weather(data, forecast) {
   const { dayWeek } = useDate()
   const { currentTimezone } = usePosition();
   const city = data?.city;
@@ -229,5 +229,5 @@ export function useWeather(data, forecast) {
     default: return getCurrent
   }
 
-
 }
+
