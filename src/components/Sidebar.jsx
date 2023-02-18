@@ -1,6 +1,7 @@
 import { Drawer, List, ListItem, ListItemIcon, Typography, Divider, IconButton } from "@mui/material";
 import { Close, Widgets, LabelImportant, Info, Layers, AlternateEmail } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function Sidebar(props) {
   const { menuOpen, closeMenu } = props;
@@ -61,4 +62,9 @@ export default function Sidebar(props) {
     </Drawer >
 
   );
+}
+
+Sidebar.propTypes = {
+  menuOpen: PropTypes.bool,
+  closeMenu: PropTypes.func
 }

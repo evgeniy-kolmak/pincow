@@ -5,6 +5,7 @@ import Click from '../components/Click';
 import { Box, Skeleton } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { usePosition } from '../hook/positionWeather';
+import PropTypes from 'prop-types';
 
 export default function Map(props) {
   const { zoom, scrollWheelZoom, handleClickMap } = props;
@@ -72,4 +73,10 @@ export default function Map(props) {
       }
     </Box >
   );
+}
+
+Map.propTypes = {
+  zoom: PropTypes.number,
+  scrollWheelZoom: PropTypes.bool,
+  handleClickMap: PropTypes.func
 }

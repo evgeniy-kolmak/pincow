@@ -1,11 +1,12 @@
-import { useWeather } from "../../hook/weather";
+import { Weather } from "../../hoc/Weather";
 import { Navigate, Link as LinkRouter } from 'react-router-dom';
 import { Typography, Box, Grid, Breadcrumbs } from '@mui/material';
 import { Home, Cloud, DateRange } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 
 export default function Day({ data }) {
-  const forecastDay = useWeather(data, 'day');
+  const forecastDay = Weather(data, 'day');
   const city = data?.city.name;
   const matches = useMediaQuery('@media (max-width:470px)');
 
@@ -92,4 +93,8 @@ export default function Day({ data }) {
     </>
   );
 
+}
+
+Day.propTypes = {
+  data: PropTypes.object
 }

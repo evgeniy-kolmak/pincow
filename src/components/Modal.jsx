@@ -2,6 +2,7 @@ import { Typography, Icon, Box, Modal, List, ListItem, ListItemText, Divider, Ic
 import { North, Air, Compress, WbTwilight, WbSunny, FilterDrama, Opacity, Grain, Visibility, FiberManualRecord, AccessTime, Close, Today } from '@mui/icons-material';
 import { usePosition } from '../hook/positionWeather';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 
 export default function CurrentForecastModal(props) {
   const matches = useMediaQuery('@media (max-width:500px)');
@@ -404,4 +405,9 @@ export default function CurrentForecastModal(props) {
       </Box>
     </Modal >
   );
+}
+
+Modal.propTypes = {
+  handleCloseModal: PropTypes.func,
+  openModal: PropTypes.bool
 }

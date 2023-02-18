@@ -1,4 +1,4 @@
-import { useWeather } from "../../hook/weather";
+import { Weather } from "../../hoc/Weather";
 import { Navigate, Link as LinkRouter } from 'react-router-dom';
 import { Typography, Icon, List, ListItem, Tooltip, ListItemText, Box, Breadcrumbs } from '@mui/material';
 import {
@@ -20,10 +20,10 @@ import {
   Today
 } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import PropTypes from 'prop-types';
 
 export default function Current({ data }) {
-  const { city, base, wind, main } = useWeather(data, 'current');
+  const { city, base, wind, main } = Weather(data, 'current');
   const matches = useMediaQuery('@media (max-width:470px)');
 
   return (
@@ -489,4 +489,8 @@ export default function Current({ data }) {
     </Box>
   );
 
+}
+
+Current.propTypes = {
+  data: PropTypes.object
 }

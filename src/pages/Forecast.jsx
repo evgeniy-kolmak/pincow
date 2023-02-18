@@ -5,6 +5,7 @@ import { TextField, Button, Box, Grid, Typography, List, ListItem, ListItemText,
 import Map from "../components/Map";
 import { Announcement, LowPriority, LocationOff, Home, Cloud } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 
 export default function Forecast(props) {
   const token = process.env.REACT_APP_TOKEN;
@@ -255,4 +256,10 @@ export default function Forecast(props) {
 
     </Box >
   );
+}
+
+Forecast.propTypes = {
+  handleData: PropTypes.func.isRequired,
+  handleCity: PropTypes.func.isRequired,
+  handleResponse: PropTypes.func.isRequired
 }

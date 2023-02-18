@@ -6,6 +6,7 @@ import Header from './Header';
 import { usePosition } from '../hook/positionWeather';
 import { useBackground } from '../hook/background';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 
 export default function SinglePage({ data }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -62,4 +63,6 @@ export default function SinglePage({ data }) {
   );
 }
 
-
+SinglePage.propTypes = {
+  data: PropTypes.object
+}

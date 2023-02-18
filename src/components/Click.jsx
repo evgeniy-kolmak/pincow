@@ -1,4 +1,5 @@
 import { useMapEvent } from 'react-leaflet/hooks';
+import PropTypes from 'prop-types';
 
 export default function Click({ handleClickMap }) {
   const map = useMapEvent({
@@ -12,4 +13,8 @@ export default function Click({ handleClickMap }) {
     }
   })
   return null;
+}
+
+Click.propTypes = {
+  handleClickMap: PropTypes.func
 }

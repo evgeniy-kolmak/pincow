@@ -1,6 +1,7 @@
 import { Link as LinkRouter, Navigate } from 'react-router-dom';
 import { Card, Box, Button, Typography, Breadcrumbs } from '@mui/material';
 import { FormatQuote, Clear, Home, Error as ErrorMui } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 
 export default function Error({ city }) {
 
@@ -147,3 +148,9 @@ export default function Error({ city }) {
     </>
   )
 }
+
+
+Error.propTypes = {
+  city: PropTypes.string
+}
+

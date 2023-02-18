@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from 'react';
 import Modal from './Modal';
+import PropTypes from 'prop-types';
 
 export default function Header({ handleMenu }) {
   const position = usePosition();
@@ -178,4 +179,8 @@ export default function Header({ handleMenu }) {
       <Modal openModal={openModal} handleCloseModal={handleModal} />
     </>
   );
+}
+
+Header.propTypes = {
+  handleMenu: PropTypes.func
 }

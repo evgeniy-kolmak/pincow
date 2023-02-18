@@ -13,6 +13,7 @@ import { Commit, LightMode, Nightlight } from '@mui/icons-material';
 import { Icon, Typography, Box, Divider, Grid } from '@mui/material';
 import { useDate } from "../hook/date";
 import { usePosition } from '../hook/positionWeather';
+import PropTypes from 'prop-types';
 
 export function Weather(data, forecast) {
   const { dayWeek } = useDate()
@@ -231,3 +232,7 @@ export function Weather(data, forecast) {
 
 }
 
+Weather.propTypes = {
+  data: PropTypes.object,
+  forecast: PropTypes.string
+}

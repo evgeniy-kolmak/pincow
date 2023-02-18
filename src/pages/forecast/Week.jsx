@@ -1,11 +1,12 @@
-import { useWeather } from "../../hook/weather";
+import { Weather } from "../../hoc/Weather";
 import { Navigate, Link as LinkRouter } from 'react-router-dom';
 import { Typography, Grid, Box, Breadcrumbs } from '@mui/material';
 import { Home, Cloud, CalendarMonth } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 
 export default function Week({ data }) {
-  const forecastWeek = useWeather(data, 'week');
+  const forecastWeek = Weather(data, 'week');
   const city = data?.city.name;
   const matches = useMediaQuery('@media (max-width:470px)');
 
@@ -88,5 +89,8 @@ export default function Week({ data }) {
         </Box>}
     </>
   );
+}
 
+Week.propTypes = {
+  data: PropTypes.object
 }

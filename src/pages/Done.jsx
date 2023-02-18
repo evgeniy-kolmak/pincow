@@ -4,6 +4,7 @@ import { DateRange, Today, CalendarMonth } from '@mui/icons-material';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
@@ -122,4 +123,9 @@ export default function Done({ response }) {
       }
     </Box>
   );
+}
+
+
+Done.propTypes = {
+  response: PropTypes.number
 }
