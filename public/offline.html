@@ -27,22 +27,24 @@
       left: 50%;
       transform: translate(-50%, -50%);
       align-items: center;
-      justify-content: space-around;
+
       flex-direction: column;
       padding: 3% 0;
       width: 550px;
-      height: 300px;
+
     }
 
     .title {
       color: #fcad03;
       text-align: center;
+      margin-bottom: 10px;
     }
 
     .subtitle {
-      font-size: 17px;
+      font-size: 18px;
       color: #ccc;
       text-align: center;
+      margin-bottom: 35px;
     }
 
     .button {
@@ -61,16 +63,14 @@
 
     @media(max-width : 600px) {
       .wrapper {
-        width: 300px;
+        width: 320px;
+        height: 230px;
       }
 
       .title {
-        font-size: 27px;
+        font-size: 24px;
       }
 
-      .subtitle {
-        font-size: 16px;
-      }
     }
   </style>
 </head>
@@ -83,7 +83,7 @@
   </div>
 
 
-  <script>
+  <!-- <script>
     document.querySelector("button").addEventListener("click", () => {
       window.location.reload();
     });
@@ -107,7 +107,7 @@
     }
 
     checkNetworkAndReload();
-  </script>
+  </script> -->
 </body>
 
 </html>
