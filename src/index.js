@@ -65,7 +65,11 @@ const theme = createTheme({
 
 });
 
-
+window.addEventListener('load', () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('servise-worker.js')
+  }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
