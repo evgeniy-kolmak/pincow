@@ -33,6 +33,10 @@ Pincow - this is Single Page Application (Progressive Web Application) providing
 
 Configured CI/CD with Github Action and SSH.
 
+### Servise-worker (PWA)
+
+The application is configured as progressive for mobile and desktop devices.
+
 ## Preview
 
 [Pincow.xyz](https://pincow.xyz/ "Preview")
