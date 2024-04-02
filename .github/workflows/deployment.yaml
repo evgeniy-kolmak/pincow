@@ -1,27 +1,26 @@
-name: Deploy
-on: 
+name: Deployment Application
+on:
   push:
-    branches: 
-      - main
-jobs: 
-  deployment:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
-      - name: Setup key
-        run: | 
-         set -eu
-         mkdir "$HOME/.ssh"
-         echo "${{secrets.key}}" > "$HOME/.ssh/key"
-         chmod 600 "$HOME/.ssh/key"
-      - name: Installation of dependencies
-        run: npm ci
-      - name: Creating an environment file
-        run: echo "REACT_APP_TOKEN = ${{secrets.token}}" >> .env
-      - name: Build app
-        run: npm run build
-      - name: Creating an htaccess file
-        run: cd build && echo "${{secrets.htaccess}}" >> .htaccess
-      - name: Deployment app
-        run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1916380@37.140.192.11:/var/www/u1916380/data/www/pincow.xyz
+    branches: [main]
+jobs:
+ deploy:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Get repository code
+      uses: actions/checkout@v4
+    - name: Cache npm dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: npm-${{ hashFiles('**/package-lock.json') }}
+    - name: Installation of dependencies
+      run: npm ci
+    - name: Creating an environment file
+      run: echo "REACT_APP_TOKEN = ${{secrets.token}}" >> .env
+    - name: Building App for prodaction
+      run: npm run build:prod
+    - name: Deployment App
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        publish_dir: ./build
