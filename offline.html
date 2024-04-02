@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Не в сети</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #1F1F28;
+      font-family: helvetica, arial, sans-serif;
+    }
+
+    .wrapper {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      align-items: center;
+
+      flex-direction: column;
+      padding: 3% 0;
+      width: 550px;
+
+    }
+
+    .title {
+      color: #fcad03;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #ccc;
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .button {
+      cursor: pointer;
+      border: 0;
+      outline: 0;
+      color: #1F1F28;
+      background-color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+      width: 125px;
+      height: 35px;
+    }
+
+    @media(max-width : 600px) {
+      .wrapper {
+        width: 320px;
+        height: 230px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="title">Отсутствует подключение к&nbsp;интернету.</h1>
+    <p class="subtitle">Попробуйте обновить страницу.</p>
+    <button class="button">Обновить</button>
+  </div>
+
+
+  <script>
+    document.querySelector("button").addEventListener("click", () => {
+      window.location.reload();
+    });
+
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+
+    async function checkNetworkAndReload() {
+      try {
+        const response = await fetch('.');
+
+        if (response.status >= 200 && response.status < 500) {
+          window.location.reload();
+          return;
+        }
+      } catch {
+        throw Error('Отсутствует подключение к интернету.')
+      }
+      window.setTimeout(checkNetworkAndReload, 5000);
+    }
+
+    checkNetworkAndReload();
+  </script>
+</body>
+
+</html>
