@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/evgeniy-kolmak/pincow/static/css/main.e8577320.css",
-    "main.js": "/evgeniy-kolmak/pincow/static/js/main.23048d36.js",
-    "index.html": "/evgeniy-kolmak/pincow/index.html",
-    "main.e8577320.css.map": "/evgeniy-kolmak/pincow/static/css/main.e8577320.css.map",
-    "main.23048d36.js.map": "/evgeniy-kolmak/pincow/static/js/main.23048d36.js.map"
+    "main.css": "/pincow/static/css/main.e8577320.css",
+    "main.js": "/pincow/static/js/main.0ad1a898.js",
+    "index.html": "/pincow/index.html",
+    "main.e8577320.css.map": "/pincow/static/css/main.e8577320.css.map",
+    "main.0ad1a898.js.map": "/pincow/static/js/main.0ad1a898.js.map"
   },
   "entrypoints": [
     "static/css/main.e8577320.css",
-    "static/js/main.23048d36.js"
+    "static/js/main.0ad1a898.js"
   ]
 }
