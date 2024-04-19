@@ -28,7 +28,7 @@ export default function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<Singlepage data={weather} />}>
+      <Route path='/pincow' element={<Singlepage data={weather} />}>
         <Route index element={<Main />} />
         <Route path='about' element={<About />} />
         <Route path='forecast' element={<Forecast handleData={handleData} handleCity={handleCity} handleResponse={handleResponse} />} />
